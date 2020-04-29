@@ -14,3 +14,23 @@
 Route::get('/', function () {
     return view('SiteInfo.index');
 });
+
+
+/**admin route**/
+	Route::get('/admin', function () { return view('Admin.index');});
+/****/
+Route::get('/menu_pagoda', function () { return view('Menu.pagoda');});
+Route::get('/menu_beach', function () { return view('Menu.beach');});
+Route::get('/menu_hotel', function () { return view('Menu.hotel');});
+Route::get('/menu_restaurant', function () { return view('Menu.restaurant');});
+Route::get('/menu_mountain', function () { return view('Menu.mountain');});
+
+Route::get('/gallery', function () { return view('Gallery.gallery');});
+Route::get('/gallery_pagoda', function () { return view('Gallery.pagoda');});
+Route::get('/gallery_beach', function () { return view('Gallery.beach');});
+Route::get('/gallery_hotel', function () { return view('Gallery.hotel');});
+Route::get('/gallery_restaurant', function () { return view('Gallery.restaurant');});
+Route::get('/gallery_mountain', function () { return view('Gallery.mountain');});
+//Route::get('/gallery_pagoda', 'homeContorller@pagodaMenu')->name('menu_pagoda');
+
+//Route::get('/delete/{id}', 'SchoolController@delete')->name('delete');

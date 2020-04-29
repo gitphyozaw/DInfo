@@ -16,14 +16,7 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,600,600i,700,700i|Satisfy|Comic+Neue:300,300i,400,400i,700,700i" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
-  <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-
+   
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
@@ -71,7 +64,7 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center">
-
+    {{ csrf_field() }}
       <div class="logo mr-auto">
         <h1 class="text-light"><a href="{{url('/')}}"><span>D Info</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
@@ -86,23 +79,23 @@
           <li><a href="#about">Home</a></li>
           <li class="menu"><a href="#menu">Menu</a>
             <div class="sub-menu">
-              <a href="#">Pagoda</a>
-              <a href="#">Beache</a>
-              <a href="#">Hotel</a>
-              <a href="#">Restaurant</a>
-              <a href="#">Mountain</a>
+              <a href="{{url('/menu_pagoda')}}">Pagoda</a>
+              <a href="{{url('/menu_beach')}}">Beache</a>
+              <a href="{{url('/menu_hotel')}}">Hotel</a>
+              <a href="{{url('/menu_restaurant')}}">Restaurant</a>
+              <a href="{{url('/menu_mountain')}}">Mountain</a>
             </div>
           </li>
           <li><a href="#specials">Specials</a></li>
           <li><a href="#events">Events</a></li>
-          <li class="menu"><a href="#gallery">Gallery</a>
-            <div class="sub-menu">
-              <a href="#">Pagoda</a>
-              <a href="#">Beache</a>
-              <a href="#">Hotel</a>
-              <a href="#">Restaurant</a>
-              <a href="#">Mountain</a>
-            </div>
+          <li class="menu"><a href="{{url('/gallery')}}">Gallery</a>
+            <!-- <div class="sub-menu">
+              <a href="{{url('/gallery_pagoda')}}">Pagoda</a>
+              <a href="{{url('/gallery_beach')}}">Beache</a>
+              <a href="{{url('/gallery_hotel')}}">Hotel</a>
+              <a href="{{url('/gallery_restaurant')}}">Restaurant</a>
+              <a href="{{url('/gallery_mountain')}}">Mountain</a>
+            </div> -->
           </li>
           <li><a href="#contact">Contact</a></li>
 
