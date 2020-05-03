@@ -1,3 +1,6 @@
+
+@extends('layouts.app')
+@section('content')
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -7,23 +10,19 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
  
 <link href="{{ asset('css/gallery.css') }}" rel="stylesheet">
-<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+<!-- <link href="{{ asset('css/style.css') }}" rel="stylesheet"> -->
 <script type="text/javascript" src="{{ asset('js/gallery.js') }}"></script>
-
-
+ 
     <!-- Page Content -->
    <div class="container page-top">
 
-
-
         <div class="row">
-
 
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                
                 <h3 class="text-light"><span>Pagodas</span></h3>
 
-                 <a href="{{url('/')}}">
+                 <a href="{{url('/gallery_pagoda')}}">
                     <img  src="https://live.staticflickr.com/4402/36696146701_b06cf42d92_b.jpg" class="zoom img-fluid "  alt="">
                 </a>
              </div>
@@ -59,23 +58,10 @@
                  <a href="{{url('/')}}">
                     <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSVLwrSQczBoJdgrlISF1LMb8RQSz639lU0-bL6BgHfQxZce3xk&usqp=CAU" class="zoom img-fluid "  alt="">
                 </a>
-             </div>
-
-            
-            
-        
-       
-            
-             
-            
-             
-            
-           
+             </div>         
            
        </div>
 
-     
-      
-
     </div>
 
+@endsection

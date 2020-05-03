@@ -27,6 +27,7 @@ Route::get('/menu_mountain', function () { return view('Menu.mountain');});
 
 Route::get('/gallery', function () { return view('Gallery.gallery');});
 Route::get('/gallery_pagoda', function () { return view('Gallery.pagoda');});
+	Route::get('/gallery_pagoda_detail', function () { return view('Gallery.pagoda_detail');});
 Route::get('/gallery_beach', function () { return view('Gallery.beach');});
 Route::get('/gallery_hotel', function () { return view('Gallery.hotel');});
 Route::get('/gallery_restaurant', function () { return view('Gallery.restaurant');});
