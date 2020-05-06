@@ -1,5 +1,5 @@
  .row {
-  background-color:#444444 !important;
+  
   font-family: "Asap", sans-serif;
   color:#989898;
   margin:10px;
@@ -8,7 +8,7 @@
 h1, h2, h3, h4, h5, h6 {
     font-family: "Satisfy", sans-serif;
 }
-
+.text-light{color:#000!important;}
 #demo {
   height:100%;
   position:relative;
@@ -64,7 +64,7 @@ img.zoom {
     
 
     .head{float:left;width:100%;}
-    .listing-block{background:#fff; height:500px; padding-top:20px; overflow-y:scroll;}
+    .listing-block{background:#fff;   padding-top:20px; }
     .slimScrollDiv{width:41%!important;}
     .media {background:#fff; position:relative; margin-bottom:15px;}
     .media img{width:200px;margin:0; height:136px;}
@@ -80,6 +80,7 @@ img.zoom {
     .map-box{background-color:#A3CCFF;}
 
 
-    
+    .about{float: right;}
+
 
  </style>

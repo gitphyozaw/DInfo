@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Delicious Bootstrap Template - Index</title>
+  <title>D Info</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -61,7 +61,10 @@
 .sub-menu a:hover {background-color: #ddd;}
 
 .menu:hover .sub-menu {display: block;}
+.book-a-table{background: #ffb03b;}
+
   </style>
+
 
 </head>
 
@@ -98,7 +101,6 @@
               <a href="{{url('/menu_mountain')}}">Mountain</a>
             </div>
           </li>
-          <li><a href="#specials">Specials</a></li>
           <li><a href="#events">Events</a></li>
           <li class="menu"><a href="{{url('/gallery')}}">Gallery</a>
             <!-- <div class="sub-menu">
@@ -110,8 +112,7 @@
             </div> -->
           </li>
           <li><a href="#contact">Contact</a></li>
-
-          <li class="book-a-table text-center"><a href="#book-a-table">Book a Package</a></li>
+          <div id="google_translate_element"></div>
         </ul>
       </nav><!-- .nav-menu -->
 
@@ -132,10 +133,11 @@
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animated fadeInDown"><span>Dawei</span> Information</h2>
-                <p class="animated fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                <p class="animated fadeInUp">  Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
                 <div>
-                  <a href="#menu" class=" btn-menu animated fadeIn search" placeholder="Search" aria-label="Search">Search</a>
-                  
+                  <a href="#menu" class=" btn-menu animated fadeIn search" placeholder="Search" aria-label="Search">Search</a><br><br>
+                  <a href="#menu" class="btn-menu book-a-table text-center" placeholder="Search" aria-label="Search">Book A Package</a>
+
                  
                 </div>
               </div>
@@ -199,5 +201,12 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en,my',includedLanguages: 'en,my'}, 'google_translate_element');
+  }
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

@@ -378,7 +378,7 @@ h1, h2, h3, h4, h5, h6 {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 100vh;
+  height: 65vh;
   background-color: rgba(39, 37, 34, 0.8);
   overflow: hidden;
   padding: 0;
@@ -1108,6 +1108,22 @@ section {
 .book-a-table .php-email-form button[type="submit"]:hover {
   background: #ffa012;
 }
+/****google translate****/
+
+.goog-logo-link {
+   display:none !important;
+} 
+
+.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+    } 
+ .goog-te-gadget .goog-te-combo {
+    margin-top: 1em !important;
+    border-color: #e08e10 ;
+}
+
+
+
 
 /*--------------------------------------------------------------
 # Gallery
