@@ -15,6 +15,8 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,600,600i,700,700i|Satisfy|Comic+Neue:300,300i,400,400i,700,700i" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+
 
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
@@ -62,9 +64,26 @@
 
 .menu:hover .sub-menu {display: block;}
 .book-a-table{background: #ffb03b;}
+#search{ 
+  width:650px;
+  height: 48px;
+  margin-bottom: 1em;
+  border-color:  #e08e10;
+  /*border-color: #e08e10 ;*/
+   
+   
+  cursor:pointer;  
+   }
+  #search_icon{
+    height: 46px;
+    width: 47px;
+    margin-left:-1px;
+    background: #ffb03b;
+    border: none;
+
+  }
 
   </style>
-
 
 </head>
 
@@ -135,8 +154,14 @@
                 <h2 class="animated fadeInDown"><span>Dawei</span> Information</h2>
                 <p class="animated fadeInUp">  Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
                 <div>
-                  <a href="#menu" class=" btn-menu animated fadeIn search" placeholder="Search" aria-label="Search">Search</a><br><br>
-                  <a href="#menu" class="btn-menu book-a-table text-center" placeholder="Search" aria-label="Search">Book A Package</a>
+                   
+                  <div class="input-field   ">
+                  <input id="search" class="animated fadeInDown scrollto" type="text" placeholder="...please enter Keywords..." aria-label="Search">
+                  <button type="submit" id="search_icon" class="animated fadeInDown fa fa-search search__icon"></button>
+                  </div>
+                  <!-- <a href="#menu" id="search" class="btn-menu animated fadeInDown scrollto"><span class="fa fa-search search__icon"></span></a><br><br> -->
+
+                  <a href="#menu" class="btn-menu book-a-table text-center" >Book A Package</a>
 
                  
                 </div>

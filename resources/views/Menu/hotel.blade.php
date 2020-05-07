@@ -11,7 +11,7 @@
 
 
     <div class="container-fluid">
-    <div class="row">
+    <div class="row shadow-lg p-3 mb-5 bg-white rounded">
         <div class="col-md-12 listing-block">
          
        
