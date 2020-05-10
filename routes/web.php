@@ -17,7 +17,8 @@ Route::get('/', function () {
 
 
 /**admin route**/
-	Route::get('/admin', function () { return view('Admin.index');});
+	Route::get('/admin', function () { return view('layouts.admin');});
+	Route::get('/admin_menu', function () { return view('Admin.menuRegistration');});
 /****/
 Route::get('/menu_pagoda', function () { return view('Menu.pagoda');});
 	Route::get('/menu_pagoda_detail', function () { return view('Menu.pagoda_detail');});
