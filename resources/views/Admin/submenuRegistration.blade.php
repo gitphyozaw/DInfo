@@ -8,60 +8,80 @@
        width: 288px;
     margin-top: 2px;}
 </style>
-<div class="container shadow-lg p-3 mb-5 bg-white rounded">
-    <div class="up jumbotron">
+<form action="{{url('/menu_registration')}}" method="post">
+    {{ csrf_field() }}
+    <div class="container shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="up jumbotron">
 
-        <div class="header-title">Submenu Registration</div> <hr class="colored cor-head" /><br>
-     
-        <div class="row">
-            <div class="col-sm-3 text">  
-                <label>Select Menu:</label>
+            <div class="header-title">Submenu Registration</div> <hr class="colored cor-head" /><br>
+         
+            <div class="row">
+                <div class="col-sm-3 text">  
+                    <label>Select Menu:</label>
+                </div>
+                <div class="col-sm-4">
+                  	<select class="form-control" >
+                  		<option value="0">---please select menu---</option>
+                  	</select>
+                </div>
             </div>
-            <div class="col-sm-4">
-              	<select class="form-control" >
-              		<option value="0">---please select menu---</option>
-              	</select>
+            <div class="row">
+                <div class="col-sm-3 text">  
+                    <label>Submenu Name:</label>
+                </div>
+                <div class="col-sm-6">
+                   <input type="text" name="" class="form-control">
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3 text">  
-                <label>Submenu Name:</label>
+            <div class="row">
+                <div class="col-sm-3 text">  
+                    <label>Image Upload:</label>
+                </div>
+                <div class="col-sm-8">
+                    <fieldset class="form-group">
+                        <a href="javascript:void(0)" onclick="$('#pro-image').click()"><span class="btn btn-primary">Upload</span></a>
+                        <input type="file" id="pro-image" name="pro-image" style="display: none;" class="form-control" multiple>
+                    </fieldset>
+                    <div class="preview-images-zone ui-sortable "></div>
+                </div>
             </div>
-            <div class="col-sm-6">
-               <input type="text" name="" class="form-control">
+            <div class="row">
+                <div class="col-sm-3 text">  
+                    <label>Video:</label>
+                </div>
+                <div class="col-sm-8">
+                    <fieldset class="form-group">
+                        <a href="javascript:void(0)" onclick="$('#pro-image').click()"><span class="btn btn-primary">Video</span></a>
+                        <input type="file" id="pro-image" name="pro-image" style="display: none;" class="form-control" multiple>
+                    </fieldset>
+                    <div class="preview-images-zone ui-sortable "></div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3 text">  
-                <label>Image Upload:</label>
-            </div>
-            <div class="col-sm-8">
-                <fieldset class="form-group">
-                    <a href="javascript:void(0)" onclick="$('#pro-image').click()"><span class="btn btn-primary">Upload</span></a>
-                    <input type="file" id="pro-image" name="pro-image" style="display: none;" class="form-control" multiple>
-                </fieldset>
-                <div class="preview-images-zone ui-sortable "></div>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-sm-3 text">  
-                <label>Description:</label>
+            <div class="row">
+                <div class="col-sm-3 text">  
+                    <label>Description:</label>
+                </div>
+                <div class="col-sm-8">
+                  <textarea class="form-control" style="
+            height: 150px;"></textarea>
+                </div>
             </div>
-            <div class="col-sm-8">
-              <textarea class="form-control" style="
-        height: 150px;"></textarea>
+            <div class="row">
+                <div class="col-sm-3 text">  
+                    <label>Address:</label>
+                </div>
+                <div class="col-sm-8">
+                  <textarea class="form-control" style="
+            height: 150px;"></textarea>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3 text">  
-                <label>Address:</label>
+            <div class="row">
+                <div class="col-sm-offset-4">
+                  <input type="submit" class="btn btn-warning" value="Register">
+                </div>
             </div>
-            <div class="col-sm-8">
-              <textarea class="form-control" style="
-        height: 150px;"></textarea>
-            </div>
-        </div>
+
     </div>
 
     <!-- for table start -->
@@ -121,6 +141,7 @@
             </table>
         </div>
     </div>
+</form>
 
 
 <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>

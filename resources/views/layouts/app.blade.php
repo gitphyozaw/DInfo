@@ -65,23 +65,13 @@
 .menu:hover .sub-menu {display: block;}
 .book-a-table{background: #ffb03b;}
 #search{ 
-  width:650px;
+  width:450px;
   height: 48px;
   margin-bottom: 1em;
-  border-color:  #e08e10;
-  /*border-color: #e08e10 ;*/
-   
-   
+  border-radius: 6px;
   cursor:pointer;  
    }
-  #search_icon{
-    height: 46px;
-    width: 47px;
-    margin-left:-1px;
-    background: #ffb03b;
-    border: none;
-
-  }
+   
 
   </style>
 
@@ -110,7 +100,7 @@
         <ul >
          <!--  <li class="active">
             <a href="ondex.html">Home</a></li> -->
-          <li><a href="#about">Home</a></li>
+          <li><a href="{{url('/')}}">Home</a></li>
           <li class="menu"><a href="#menu">Menu</a>
             <div class="sub-menu">
               <a href="{{url('/menu_pagoda')}}">Pagoda</a>
@@ -148,16 +138,20 @@
         <div class="carousel-inner" role="listbox">
 
           <!-- Slide 1 -->
-          <div class="carousel-item active" style="background: url(assets/img/slide/slider4.jpg); height: 400px;">
+          <div class="carousel-item active" >
+            <video autoplay muted loop id="myVideo">
+              <source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4" type="video/mp4">
+               <!--  <source src="public/video/pho-pho-kyaut-beach-dawei-myanmar.mp4" type="video/mp4"> -->
+            </video>
+
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animated fadeInDown"><span>Dawei</span> Information</h2>
                 <p class="animated fadeInUp">  Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
                 <div>
                    
-                  <div class="input-field   ">
-                  <input id="search" class="animated fadeInDown scrollto" type="text" placeholder="...please enter Keywords..." aria-label="Search">
-                  <button type="submit" id="search_icon" class="animated fadeInDown fa fa-search search__icon"></button>
+                  <div class="input-field  ">
+                    <input id="search" class="animated fadeInDown scrollto" type="text" placeholder="@please enter Keywords" aria-label="Search">
                   </div>
                   <!-- <a href="#menu" id="search" class="btn-menu animated fadeInDown scrollto"><span class="fa fa-search search__icon"></span></a><br><br> -->
 
@@ -172,7 +166,7 @@
 
         </div>
 
-        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+       <!--  <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon icofont-simple-left" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
@@ -180,7 +174,7 @@
         <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
           <span class="carousel-control-next-icon icofont-simple-right" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
-        </a>
+        </a> -->
 
       </div>
     </div>
@@ -191,7 +185,7 @@
 <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
-      <h3>Delicious</h3>
+      <h3>Dawei Infomation</h3>
       <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
       <div class="social-links">
         <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -201,7 +195,7 @@
         <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
       </div>
       <div class="copyright">
-        &copy; Copyright <strong><span>Delicious</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>D Info</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
@@ -222,7 +216,9 @@
   <script src="assets/vendor/jquery-sticky/jquery.sticky.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/venobox/venobox.min.js"></script>
-  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <!-- <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>

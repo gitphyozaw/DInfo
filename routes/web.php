@@ -40,7 +40,10 @@ Route::get('/gallery_restaurant', function () { return view('Gallery.restaurant_
 	Route::get('/gallery_restaurant_detail', function () { return view('Gallery.restaurant_detail');});
 Route::get('/gallery_mountain', function () { return view('Gallery.mountain');});
 	Route::get('/gallery_mountain_detail', function () { return view('Gallery.mountain_detail');});
-	
-//Route::get('/gallery_pagoda', 'homeContorller@pagodaMenu')->name('menu_pagoda');
+
+/****Registration****/	
+
+Route::post('/menu_registration', 'menuController@create');
+Route::post('/submenu_registration', 'submenuContorller@submenuInsert');
 
 //Route::get('/delete/{id}', 'SchoolController@delete')->name('delete');

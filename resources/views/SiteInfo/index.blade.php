@@ -12,14 +12,16 @@
 
         <div class="row">
 
-          <div class="col-lg-5 align-items-stretch video-box" style='background-image: url("assets/img/about.jpg");'>
-            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
+          <!-- <div class="col-lg-5 align-items-stretch video-box" style='background-image: url("assets/img/about.jpg");'> -->
+          <div class="col-lg-5 align-items-stretch video-box" style='background-image: url(" https://i1.wp.com/southernmyanmarplus.com/wp-content/uploads/2018/02/dawei-myanmar-61.jpg?resize=825%2C350&ssl=1");'>
+
+            <a href="https://www.youtube.com/watch?v=kytH0TV7LQk" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
           </div>
 
           <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch">
 
             <div class="content">
-              <h3>Eum ipsam laborum deleniti <strong>velit pariatur architecto aut nihil</strong></h3>
+              <h3>Dawei Beautiful Place<strong> velit pariatur architecto aut nihil</strong></h3>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
               </p>
@@ -618,30 +620,26 @@
             <div class="col-lg-3 col-md-6 info">
               <i class="icofont-google-map"></i>
               <h4>Location:</h4>
-              <p>A108 Adam Street<br>New York, NY 535022</p>
-            </div>
-
-            <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
-              <i class="icofont-clock-time icofont-rotate-90"></i>
-              <h4>Open Hours:</h4>
-              <p>Monday-Saturday:<br>11:00 AM - 2300 PM</p>
+              <p>Beauty Dawei Place</p>
             </div>
 
             <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
               <i class="icofont-envelope"></i>
               <h4>Email:</h4>
-              <p>info@example.com<br>contact@example.com</p>
+              <p>phyoacon1995@gmail.com<br>phyozawoo600@gmail.com</p>
             </div>
 
             <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
               <i class="icofont-phone"></i>
               <h4>Call:</h4>
-              <p>+1 5589 55488 51<br>+1 5589 22475 14</p>
+              <p>09 2540 986 08<br>+959 2540 986 08</p>
             </div>
           </div>
         </div>
 
         <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <label>You can write any message.</label>
+          
           <div class="form-row">
             <div class="col-md-6 form-group">
               <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
