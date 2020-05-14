@@ -22,6 +22,9 @@
                 <div class="col-sm-4">
                   	<select class="form-control" >
                   		<option value="0">---please select menu---</option>
+                        @foreach($Menu as $menu)
+                            <option value="{{$menu->id}}">{{$menu->name}}</option>
+                        @endforeach
                   	</select>
                 </div>
             </div>

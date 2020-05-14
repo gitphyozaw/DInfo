@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
+use DB;
 class menuController extends Controller
 {
     /**
@@ -13,7 +15,9 @@ class menuController extends Controller
      */
     public function index()
     {
-        //
+        $all_menu = DB::table('dtb_menu')->where('status','1')->get();
+        return view("Admin/menuRegistration")->with('Menu',$all_menu);
+
     }
 
     /**
@@ -23,64 +27,48 @@ class menuController extends Controller
      */
     public function create(Request $request)
     {
-        $input = $request->all();
-        dd($input);die();
-        $new_media =  DB::table('dtb_menu')->create($input);
-    }
+       $this->validate($request, [
+           'menu' => 'required'
+       ]);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $menu_data = array(
+            'name' =>$request['menu'] ,
+            'status' =>1,
+            'created_date' =>date('Y-m-d H:i:s'),
+            'updated_date' =>date('Y-m-d H:i:s')
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+             );
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        try{
+            DB::table('dtb_menu')->insert($menu_data);
+            $request->session()->flash('alert-success', 'Save successful!');
+        }catch (\Exception $e) {
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+            return $e->getMessage();
+        }
+        return redirect()->action('menuController@index');
+       
     }
+ 
+   
 
+     
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        //
+        
+         try{
+             DB::table('dtb_menu')->delete($id);
+            $request->session()->flash('alert-success', 'Delete successful!');
+        }catch (\Exception $e) {
+
+            return $e->getMessage();
+        }
+        return redirect()->action('menuController@index');
     }
 }

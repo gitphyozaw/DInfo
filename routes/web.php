@@ -18,8 +18,10 @@ Route::get('/', function () {
 
 /**admin route**/
 	Route::get('/admin', function () { return view('layouts.admin');});
-	Route::get('/admin_menu', function () { return view('Admin.menuRegistration');});
-	Route::get('/admin_submenu', function () { return view('Admin.submenuRegistration');});
+	Route::get('/admin_menu', 'menuController@index');
+
+	Route::get('/admin_submenu', 'submenuController@index');
+
 /****/
 Route::get('/menu_pagoda', function () { return view('Menu.pagoda');});
 	Route::get('/menu_pagoda_detail', function () { return view('Menu.pagoda_detail');});
@@ -44,6 +46,8 @@ Route::get('/gallery_mountain', function () { return view('Gallery.mountain');})
 /****Registration****/	
 
 Route::post('/menu_registration', 'menuController@create');
+	Route::get('/menu_delete/{id}', 'menuController@destroy');
 Route::post('/submenu_registration', 'submenuContorller@submenuInsert');
+
 
 //Route::get('/delete/{id}', 'SchoolController@delete')->name('delete');

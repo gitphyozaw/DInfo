@@ -1,0 +1,14 @@
+dtb_user(id,username,email,password,phone,gender,address,role,status,created_date, updated_date)
+dtb_package(id,user_id,menu_id,name,title,description,review,status,created_date,updated_date)
+dtb_info
+dtb_menu(id,name,menu_image,status,created_date,updated_date)
+dtb_submenu(id,menu_id,name,address,description,menu_type,created_date,updated_date)
+dtb_submenu_image(id,submenu_id,image,video,submenu_image)
+dtb_gallery()
+
+API Key: AIzaSyAb5ixbU_fX94BmUJLocpWegj1mKG1bsf4
+
+to insert message icon
+https://myanmartravel.website/shin-koe-shin-pagodas/
+https://bootsnipp.com/snippets/kl2OQ
+https://bootsnipp.com/snippets/7nWnV
