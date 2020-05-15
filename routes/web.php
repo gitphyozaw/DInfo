@@ -47,7 +47,7 @@ Route::get('/gallery_mountain', function () { return view('Gallery.mountain');})
 
 Route::post('/menu_registration', 'menuController@create');
 	Route::get('/menu_delete/{id}', 'menuController@destroy');
-Route::post('/submenu_registration', 'submenuContorller@submenuInsert');
+Route::post('/submenu_registration', 'submenuController@submenuInsert');
 
 
 //Route::get('/delete/{id}', 'SchoolController@delete')->name('delete');

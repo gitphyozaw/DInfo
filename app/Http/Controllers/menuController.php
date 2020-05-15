@@ -16,6 +16,7 @@ class menuController extends Controller
     public function index()
     {
         $all_menu = DB::table('dtb_menu')->where('status','1')->get();
+        
         return view("Admin/menuRegistration")->with('Menu',$all_menu);
 
     }

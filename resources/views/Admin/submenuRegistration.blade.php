@@ -8,7 +8,7 @@
        width: 288px;
     margin-top: 2px;}
 </style>
-<form action="{{url('/menu_registration')}}" method="post">
+<form action="{{url('/submenu_registration')}}" method="post">
     {{ csrf_field() }}
     <div class="container shadow-lg p-3 mb-5 bg-white rounded">
         <div class="up jumbotron">
@@ -20,12 +20,20 @@
                     <label>Select Menu:</label>
                 </div>
                 <div class="col-sm-4">
-                  	<select class="form-control" >
+                  	<select class="form-control" name="menu">
                   		<option value="0">---please select menu---</option>
                         @foreach($Menu as $menu)
-                            <option value="{{$menu->id}}">{{$menu->name}}</option>
+                            <option value="{{$menu->id}},{{$menu->name}}">{{$menu->name}}</option>
                         @endforeach
                   	</select>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-sm-3 text">  
+                    <label>Title:</label>
+                </div>
+                <div class="col-sm-6">
+                   <input type="text" name="title" class="form-control">
                 </div>
             </div>
             <div class="row">
@@ -33,7 +41,7 @@
                     <label>Submenu Name:</label>
                 </div>
                 <div class="col-sm-6">
-                   <input type="text" name="" class="form-control">
+                   <input type="text" name="submenu" class="form-control">
                 </div>
             </div>
             <div class="row">
@@ -43,7 +51,7 @@
                 <div class="col-sm-8">
                     <fieldset class="form-group">
                         <a href="javascript:void(0)" onclick="$('#pro-image').click()"><span class="btn btn-primary">Upload</span></a>
-                        <input type="file" id="pro-image" name="pro-image" style="display: none;" class="form-control" multiple>
+                        <input type="file" id="pro-image" name="pro-image[]" style="display: none;" class="form-control" multiple>
                     </fieldset>
                     <div class="preview-images-zone ui-sortable "></div>
                 </div>
@@ -55,9 +63,9 @@
                 <div class="col-sm-8">
                     <fieldset class="form-group">
                         <a href="javascript:void(0)" onclick="$('#pro-image').click()"><span class="btn btn-primary">Video</span></a>
-                        <input type="file" id="pro-image" name="pro-image" style="display: none;" class="form-control" multiple>
+                        <input type="file" id="video" name="video" style="display: none;" class="form-control" multiple>
                     </fieldset>
-                    <div class="preview-images-zone ui-sortable "></div>
+                    <div class="preview-videos-zone ui-sortable "></div>
                 </div>
             </div>
 
@@ -67,7 +75,7 @@
                 </div>
                 <div class="col-sm-8">
                   <textarea class="form-control" style="
-            height: 150px;"></textarea>
+            height: 150px;" name="description"></textarea>
                 </div>
             </div>
             <div class="row">
@@ -76,7 +84,7 @@
                 </div>
                 <div class="col-sm-8">
                   <textarea class="form-control" style="
-            height: 150px;"></textarea>
+            height: 150px;" name="address"></textarea>
                 </div>
             </div>
             <div class="row">
@@ -94,9 +102,7 @@
         <div class="panel panel-primary filterable">
             <div class="panel-heading">
                 <h3 class="panel-title">Submenus</h3>
-                <div class="pull-right">
-                    <button style="width: 100px;height: 28px;" class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                </div>
+
             </div>
             <table class="table">
                 <thead>
@@ -224,6 +230,71 @@
 <script type="text/javascript">
     
     
+$(document).ready(function() {
+   document.getElementById('pro-image').addEventListener('change', readImage, false);
+    
+    $( ".preview-images-zone" ).sortable();
+    
+    $(document).on('click', '.image-cancel', function() {
+        let no = $(this).data('no');
+        $(".preview-image.preview-show-"+no).remove();
+    });
+
+
+/*FOR Toggle */
+   $("#mytable #checkall").click(function () {
+        if ($("#mytable #checkall").is(':checked')) {
+            $("#mytable input[type=checkbox]").each(function () {
+                $(this).prop("checked", true);
+            });
+
+        } else {
+            $("#mytable input[type=checkbox]").each(function () {
+                $(this).prop("checked", false);
+            });
+        }
+    });
+    
+    $("[data-toggle=tooltip]").tooltip();
+
+/***END Toggle***/
+
+});
+
+
+var num = 4;
+function readImage() {  
+
+    if (window.File && window.FileList && window.FileReader) {
+        var files = event.target.files; //FileList object
+        var output = $(".preview-images-zone");
+alert(files.length);
+        for (let i = 0; i < files.length; i++) {
+            var file = files[i];
+            if (!file.type.match('image')) continue;
+            
+            var picReader = new FileReader();
+            
+            picReader.addEventListener('load', function (event) {
+                var picFile = event.target;
+                var html =  '<div class="preview-image preview-show-' + num + '">' +
+                            '<div class="image-cancel" data-no="' + num + '">x</div>' +
+                            '<div class="image-zone"><img id="pro-img-' + num + '" src="' + picFile.result + '"></div>' +
+                            '<div class="tools-edit-image"><a href="javascript:void(0)" data-no="' + num + '" class="btn btn-light btn-edit-image">edit</a></div>' +
+                            '</div>';
+
+                output.append(html);
+                num = num + 1;
+            });
+
+            picReader.readAsDataURL(file);
+        }
+        $("#pro-image").val('');
+    } else {
+        console.log('Browser not support');
+    }
+}
+
 </script>
 
    
