@@ -101,10 +101,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $i=1; ?>
                             @foreach ($Menu as $menu) 
                               <tr>
                                 <td></td>
-                                <td>{{$menu->id}}</td>
+                                <td>{{$i++}}</td>
                                 <td>{{$menu->name}}</td>
                                <!--  <td>
                                     <a href="" data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-pencil" style="font-size: 18px;"></span> </a>

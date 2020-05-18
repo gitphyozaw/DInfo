@@ -7,6 +7,22 @@
     .cor-head{
        width: 288px;
     margin-top: 2px;}
+    .required{
+        color: red;
+        font-size: 24px;
+    }
+    .error_msg{
+        color:red;
+    }
+    .desc{
+        width: 600px;
+        max-height: 400px;
+        overflow-y: auto;
+    }
+    .table>thead>tr>th {
+    border-bottom: 2px solid #100d0d;
+    }
+      
 </style>
 <form action="{{url('/submenu_registration')}}" method="post">
     {{ csrf_field() }}
@@ -14,7 +30,15 @@
         <div class="up jumbotron">
 
             <div class="header-title">Submenu Registration</div> <hr class="colored cor-head" /><br>
-         
+            @if (Session::has('alert-success'))
+                <div class="alert alert-success alert-block" id="alert-success">
+                    <button type="button" class="close" id="close" data-dismiss="alert" aria-label="Close">×</button> 
+                        <strong>{{ Session::get('alert-success') }}</strong>
+                </div>
+            @endif
+
+            <p><b class="required">*</b> <i>You must be fill this field!</i></p>
+
             <div class="row">
                 <div class="col-sm-3 text">  
                     <label>Select Menu:</label>
@@ -23,7 +47,7 @@
                   	<select class="form-control" name="menu">
                   		<option value="0">---please select menu---</option>
                         @foreach($Menu as $menu)
-                            <option value="{{$menu->id}},{{$menu->name}}">{{$menu->name}}</option>
+                            <option value="{{$menu->id}},{{$menu->name}}" >{{$menu->name}}</option>
                         @endforeach
                   	</select>
                 </div>
@@ -33,17 +57,26 @@
                     <label>Title:</label>
                 </div>
                 <div class="col-sm-6">
-                   <input type="text" name="title" class="form-control">
+                   <input type="text" name="title" class="form-control" value="{{ old('title') }}">
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-3 text">  
-                    <label>Submenu Name:</label>
+                    <label >Submenu Name<span class="required">*</span>:</label>
                 </div>
                 <div class="col-sm-6">
                    <input type="text" name="submenu" class="form-control">
                 </div>
             </div>
+             @if ($errors->any())
+                    <div class="col-sm-offset-3 error_msg">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             <div class="row">
                 <div class="col-sm-3 text">  
                     <label>Image Upload:</label>
@@ -69,22 +102,23 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-3 text">  
-                    <label>Description:</label>
-                </div>
-                <div class="col-sm-8">
-                  <textarea class="form-control" style="
-            height: 150px;" name="description"></textarea>
-                </div>
-            </div>
+           
             <div class="row">
                 <div class="col-sm-3 text">  
                     <label>Address:</label>
                 </div>
                 <div class="col-sm-8">
                   <textarea class="form-control" style="
-            height: 150px;" name="address"></textarea>
+            height: 150px;" name="address">{{Request::old('address')}}</textarea>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-sm-3 text">  
+                    <label>Description:</label>
+                </div>
+                <div class="col-sm-8">
+                  <textarea class="form-control" style="
+            height: 150px;" name="description">{{Request::old('description')}}</textarea>
                 </div>
             </div>
             <div class="row">
@@ -110,46 +144,38 @@
                         <th><input type="text" class="form-control" placeholder="#" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Menu" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Submenu" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Description" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Address" disabled></th>
-                        <th><label>Action</label></th>
+                        <th><input type="text" class="form-control" placeholder="Description" disabled></th>
+                       
+                        <th width="10%;" colspan="2"><label>Action</label></th>
                     </tr>
                 </thead>
+
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                         <td>
-                            <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil" style="font-size: 18px;"></span></button>
+                    <?php  $i = 1; ?>
+                    @foreach ($Submenu as $submenu)
+
+                      <tr>
+                        <td>{{$i++}}</td>
+                        <td>{{$submenu->menu_type}}</td>
+                        <td>{{$submenu->name}}</td>
+                        <td>{{$submenu->address}}</td>
+                        <td class="desc">{{$submenu->description}}</td>
+                        <td>
+                            <a href="{{url('/submenu_edit', $submenu->id)}}" data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-pencil" style="font-size: 18px;"></span> </a>
                         </td>
                         <td>
-                            <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash" style="font-size: 18px;"></span></button>
+                             <a href="{{url('/submenu_delete', $submenu->id)}}" class="delete-confirm"><span class="glyphicon glyphicon-trash" style="font-size: 18px; color:red;" ></span></a>
                         </td>
-                      
                     </tr>
-                     <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                         <td>
-                            <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil" style="font-size: 18px;"></span></button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash" style="font-size: 18px;"></span></button>
-                        </td>
-                      
-                    </tr>
-                     
-                   
+                    @endforeach
                 </tbody>
             </table>
         </div>
+             {{ $Submenu->links() }}
+
     </div>
+
 </form>
 
 
@@ -257,9 +283,14 @@ $(document).ready(function() {
     
     $("[data-toggle=tooltip]").tooltip();
 
+
+}); 
+    
+
 /***END Toggle***/
 
-});
+
+
 
 
 var num = 4;
@@ -268,7 +299,7 @@ function readImage() {
     if (window.File && window.FileList && window.FileReader) {
         var files = event.target.files; //FileList object
         var output = $(".preview-images-zone");
-alert(files.length);
+
         for (let i = 0; i < files.length; i++) {
             var file = files[i];
             if (!file.type.match('image')) continue;
@@ -294,7 +325,7 @@ alert(files.length);
         console.log('Browser not support');
     }
 }
-
+$('div.alert').not('.alert-important').delay(3000).slideUp(300);
 </script>
 
    
