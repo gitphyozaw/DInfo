@@ -7,7 +7,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Pagination\Paginator;
 
 use DB;
-
+use Session;
 class submenuController extends Controller
 {
 	/**
@@ -18,7 +18,12 @@ class submenuController extends Controller
     public function index(){
 	    $all_menu = DB::table('dtb_menu')->where('status','1')->get();
 	    $all_submenu = DB::table('dtb_submenu')->where('status','1')->paginate(2);
+
+        $upd_data = Session::get('Upd_data');
+        $upd_data = isset($upd_data)? $upd_data : null;
+
 	    return view("Admin/submenuRegistration")
+        ->with('Upd_data',$upd_data)
 	    ->with('Menu',$all_menu)
 	    ->with('Submenu',$all_submenu);
 	}
@@ -28,36 +33,59 @@ class submenuController extends Controller
      * @return \Illuminate\Http\Response
      */
    	public function submenuInsert(Request $request){
-       $this->validate($request, [
+
+        $this->validate($request, [
            'submenu' => 'required'
        ]);
 
-   		$sel_menu = $request['menu'];
-   		$menu = explode(',', $sel_menu);
-   		if(!empty($menu)){
-   			$menu_id = isset($menu['0'])? $menu['0'] : null;
-   			$menu_type = isset($menu['1'])? $menu['1'] :null;
-   		}
+        if($request['flag']=="update"){//update
 
-        $submenu_data = array(
-            'menu_id' 		=> $menu_id ,
-            'name' 			=> $request['submenu'] ,
-            'address' 		=> $request['address'] ,
-            'description' 	=> $request['description'] ,
-            'menu_type' 	=> $menu_type,
-            'status' 		=> 1,
-            'created_date' 	=>date('Y-m-d H:i:s'),
-            'updated_date' 	=>date('Y-m-d H:i:s')
+            $id = $request["ID"];
+            $this->update($request,$id);
 
-             );
+        }else{//insert
+            $sel_menu = $request['menu'];
+            $chk  = $request['chk'];
+            $menu = explode(',', $sel_menu);
+            if(!empty($menu)){
+                $menu_id = isset($menu['0'])? $menu['0'] : null;
+                $menu_type = isset($menu['1'])? $menu['1'] :null;
+            }
 
-        try{
-            DB::table('dtb_submenu')->insert($submenu_data);
-            $request->session()->flash('alert-success', 'Save successful!');
-        }catch (\Exception $e) {
+            if(!empty(count($chk) == 3)){
+               $season = "other";
+            }else if(!empty(count($chk) == 2)){
+               $season = $chk['0'].",".$chk['1'];
+            }
+            else{
+                $season = $chk['0'];
+            }
 
-            return $e->getMessage();
+            $submenu_data = array(
+                'menu_id'       => $menu_id ,
+                'title'         => $request['title'] ,
+                'name'          => $request['submenu'] ,
+                'address'       => $request['address'] ,
+                'description'   => $request['description'] ,
+                'menu_type'     => $menu_type,
+                'season'        => $season,
+                'status'        => 1,
+                'created_date'  =>date('Y-m-d H:i:s'),
+                'updated_date'  =>date('Y-m-d H:i:s')
+
+                 );
+
+            try{
+                DB::table('dtb_submenu')->insert($submenu_data);
+                $request->session()->flash('alert-success', 'Save successful!');
+            }catch (\Exception $e) {
+
+                return $e->getMessage();
+            }
         }
+       
+
+   		
         return redirect()->action('submenuController@index');
    }
    /**
@@ -66,9 +94,55 @@ class submenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,$id)
+    public function submenuEdit($id)
     {
-    	
+
+        $upd_data = DB::table('dtb_submenu')->where('id',$id)->first();
+        Session::flash('Upd_data', $upd_data);
+
+        $all_menu = DB::table('dtb_menu')->where('status','1')->get();
+        $all_submenu = DB::table('dtb_submenu')->where('status','1')->paginate(2);
+        return redirect()->action('submenuController@index');
+        }
+
+    public function update($request,$id){
+       
+        $sel_menu = $request['menu'];
+        $chk  = $request['chk'];
+
+        $menu = explode(',', $sel_menu);
+            if(!empty($menu)){
+                $menu_id = isset($menu['0'])? $menu['0'] : null;
+                $menu_type = isset($menu['1'])? $menu['1'] :null;
+            }
+            if(!empty(count($chk) == 3)){
+               $season = "other";
+            }else if(!empty(count($chk) == 2)){
+               $season = $chk['0'].",".$chk['1'];
+            }
+            else{
+                $season = $chk['0'];
+            }
+
+
+        $update_data = array(
+            'menu_id'       => $menu_id ,
+            'title'         => $request['title'] ,
+            'name'          => $request['submenu'] ,
+            'address'       => $request['address'] ,
+            'description'   => $request['description'] ,
+            'menu_type'     => $menu_type,
+            'season'        => $season,
+            'updated_date'  =>date('Y-m-d H:i:s')
+
+             );
+        try{
+            DB::table('dtb_submenu')->where('id',$id)->update($update_data);
+            $request->session()->flash('alert-success', 'Update successful!');
+            }catch (\Exception $e) {
+
+                return $e->getMessage();
+            }
     }
     /**
      * Remove the specified resource from storage.

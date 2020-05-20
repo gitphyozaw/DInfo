@@ -71,7 +71,20 @@
   border-radius: 6px;
   cursor:pointer;  
    }
-   
+.weather{
+  font-size: 22px;
+  color: #fff;
+}
+.fas{
+  font-size: 22px;
+  color: #7b93a3;
+  padding: 20px;
+}
+a:active {
+  background-color: #2458af;
+  border-radius: 6px;
+}
+ 
 
   </style>
 
@@ -110,15 +123,8 @@
               <a href="{{url('/menu_mountain')}}">Mountain</a>
             </div>
           </li>
-          <li><a href="#events">Events</a></li>
+          <li><a href="#events">Festivals</a></li>
           <li class="menu"><a href="{{url('/gallery')}}">Gallery</a>
-            <!-- <div class="sub-menu">
-              <a href="{{url('/gallery_pagoda')}}">Pagoda</a>
-              <a href="{{url('/gallery_beach')}}">Beache</a>
-              <a href="{{url('/gallery_hotel')}}">Hotel</a>
-              <a href="{{url('/gallery_restaurant')}}">Restaurant</a>
-              <a href="{{url('/gallery_mountain')}}">Mountain</a>
-            </div> -->
           </li>
           <li><a href="#contact">Contact</a></li>
           <div id="google_translate_element"></div>
@@ -149,7 +155,11 @@
                 <h2 class="animated fadeInDown"><span>Dawei</span> Information</h2>
                 <p class="animated fadeInUp">  Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
                 <div>
-                   
+                  <div class="weather">
+                   <a href="#"><i class="fas fa-cloud-sun season1 "> Summer</i></a>
+                   <a href="#"><i class="fas fa-cloud-rain season2"> Rainy</i></a>
+                   <a href="#"><i class="fas fa-cloud-meatball season3"> Wintter</i></a>
+                  </div>
                   <div class="input-field  ">
                     <input id="search" class="animated fadeInDown scrollto" type="text" placeholder="@please enter Keywords" aria-label="Search">
                   </div>
@@ -218,14 +228,47 @@
   <script src="assets/vendor/venobox/venobox.min.js"></script>
   <!-- <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 <script type="text/javascript">
+  $( document ).ready(function() {
+   
+      var today = new Date();
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      if(mm >= 03 || mm <= 06){
+         $(".season1").css('color','#dd3524 ');
+      }else if(mm <= 07 || mm <= 10){
+         $(".season2").css('color','#1c5680');
+      }else{
+         $(".season3").css('color','#f1f1f1');
+
+      }
+   
+  });
+  $('.season1').on('click',function(){
+            $(this).css('color','blue');
+            $(".season2").css('color','#7b93a3');
+            $(".season3").css('color','#7b93a3');
+     });
+  $('.season2').on('click',function(){
+            $(this).css('color','blue');
+            $(".season1").css('color','#7b93a3');
+            $(".season3").css('color','#7b93a3');
+     });
+  $('.season3').on('click',function(){
+            $(this).css('color','blue');
+            $(".season1").css('color','#7b93a3');
+            $(".season2").css('color','#7b93a3');
+     });
   function googleTranslateElementInit() {
     new google.translate.TranslateElement({pageLanguage: 'en,my',includedLanguages: 'en,my'}, 'google_translate_element');
   }
+
+    
+
 </script>
 
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

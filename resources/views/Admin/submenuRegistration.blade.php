@@ -22,116 +22,159 @@
     .table>thead>tr>th {
     border-bottom: 2px solid #100d0d;
     }
+    .left{
+        margin-left: -2em !important;
+        border: 2px solid #d9efe6;
+
+    }
+    .right{
+        margin-left: 16px !important;
+        border: 2px solid #d9efe6;
+        width: 
+    }
+    .chk{
+        width: 18px !important;    
+        height: 18px !important;    
+    }
       
 </style>
 <form action="{{url('/submenu_registration')}}" method="post">
     {{ csrf_field() }}
     <div class="container shadow-lg p-3 mb-5 bg-white rounded">
-        <div class="up jumbotron">
+        <div class="row">
+            <div class="col-sm-9 jumbotron left">
 
-            <div class="header-title">Submenu Registration</div> <hr class="colored cor-head" /><br>
-            @if (Session::has('alert-success'))
-                <div class="alert alert-success alert-block" id="alert-success">
-                    <button type="button" class="close" id="close" data-dismiss="alert" aria-label="Close">×</button> 
-                        <strong>{{ Session::get('alert-success') }}</strong>
-                </div>
-            @endif
-
-            <p><b class="required">*</b> <i>You must be fill this field!</i></p>
-
-            <div class="row">
-                <div class="col-sm-3 text">  
-                    <label>Select Menu:</label>
-                </div>
-                <div class="col-sm-4">
-                  	<select class="form-control" name="menu">
-                  		<option value="0">---please select menu---</option>
-                        @foreach($Menu as $menu)
-                            <option value="{{$menu->id}},{{$menu->name}}" >{{$menu->name}}</option>
-                        @endforeach
-                  	</select>
-                </div>
-            </div>
-             <div class="row">
-                <div class="col-sm-3 text">  
-                    <label>Title:</label>
-                </div>
-                <div class="col-sm-6">
-                   <input type="text" name="title" class="form-control" value="{{ old('title') }}">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3 text">  
-                    <label >Submenu Name<span class="required">*</span>:</label>
-                </div>
-                <div class="col-sm-6">
-                   <input type="text" name="submenu" class="form-control">
-                </div>
-            </div>
-             @if ($errors->any())
-                    <div class="col-sm-offset-3 error_msg">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+                <div class="header-title">Submenu Registration</div> <hr class="colored cor-head" /><br>
+                @if (Session::has('alert-success'))
+                    <div class="alert alert-success alert-block" id="alert-success">
+                        <button type="button" class="close" id="close" data-dismiss="alert" aria-label="Close">×</button> 
+                            <strong>{{ Session::get('alert-success') }}</strong>
                     </div>
                 @endif
-            <div class="row">
-                <div class="col-sm-3 text">  
-                    <label>Image Upload:</label>
-                </div>
-                <div class="col-sm-8">
-                    <fieldset class="form-group">
-                        <a href="javascript:void(0)" onclick="$('#pro-image').click()"><span class="btn btn-primary">Upload</span></a>
-                        <input type="file" id="pro-image" name="pro-image[]" style="display: none;" class="form-control" multiple>
-                    </fieldset>
-                    <div class="preview-images-zone ui-sortable "></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3 text">  
-                    <label>Video:</label>
-                </div>
-                <div class="col-sm-8">
-                    <fieldset class="form-group">
-                        <a href="javascript:void(0)" onclick="$('#pro-image').click()"><span class="btn btn-primary">Video</span></a>
-                        <input type="file" id="video" name="video" style="display: none;" class="form-control" multiple>
-                    </fieldset>
-                    <div class="preview-videos-zone ui-sortable "></div>
-                </div>
-            </div>
 
-           
-            <div class="row">
-                <div class="col-sm-3 text">  
-                    <label>Address:</label>
-                </div>
-                <div class="col-sm-8">
-                  <textarea class="form-control" style="
-            height: 150px;" name="address">{{Request::old('address')}}</textarea>
-                </div>
-            </div>
-             <div class="row">
-                <div class="col-sm-3 text">  
-                    <label>Description:</label>
-                </div>
-                <div class="col-sm-8">
-                  <textarea class="form-control" style="
-            height: 150px;" name="description">{{Request::old('description')}}</textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-offset-4">
-                  <input type="submit" class="btn btn-warning" value="Register">
-                </div>
-            </div>
+                <p><b class="required">*</b> <i>You must be fill this field!</i></p>
 
+                <div class="row">
+                    <div class="col-sm-3 text">  
+                        <label>Select Menu:</label>
+                    </div>
+                    <div class="col-sm-4">
+                      	<select class="form-control" name="menu">
+                      		<option value="0">---please select menu---</option>
+                            @foreach($Menu as $menu)
+                                <option value="{{$menu->id}},{{$menu->name}}" >{{$menu->name}}</option>
+                            @endforeach
+                      	</select>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-sm-3 text">  
+                        <label>Title:</label>
+                    </div>
+                    <div class="col-sm-6">
+                       <input type="text" name="title" class="form-control" value="{{old('title')}}<?php 
+                       if(!empty($Upd_data)) echo $Upd_data->title; ?>">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 text">  
+                        <label >Submenu Name<span class="required">*</span>:</label>
+                    </div>
+                    <div class="col-sm-6">
+                       <input type="text" name="submenu" class="form-control" value="{{old('submenu')}}<?php 
+                       if(!empty($Upd_data)) echo $Upd_data->name; ?>">
+                    </div>
+                </div>
+                 @if ($errors->any())
+                        <div class="col-sm-offset-3 error_msg">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                <div class="row">
+                    <div class="col-sm-3 text">  
+                        <label>Image Upload:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <fieldset class="form-group">
+                            <a href="javascript:void(0)" onclick="$('#pro-image').click()"><span class="btn btn-primary">Upload</span></a>
+                            <input type="file" id="pro-image" name="pro-image[]" style="display: none;" class="form-control" multiple>
+                        </fieldset>
+                        <div class="preview-images-zone ui-sortable "></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 text">  
+                        <label>Video:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <fieldset class="form-group">
+                            <a href="javascript:void(0)" onclick="$('#pro-image').click()"><span class="btn btn-primary">Video</span></a>
+                            <input type="file" id="video" name="video" style="display: none;" class="form-control" multiple>
+                        </fieldset>
+                        <div class="preview-videos-zone ui-sortable "></div>
+                    </div>
+                </div>
+
+               
+                <div class="row">
+                    <div class="col-sm-3 text">  
+                        <label>Address:</label>
+                    </div>
+                    <div class="col-sm-8">
+                      <textarea class="form-control" style="
+                height: 150px;" name="address" ><?php 
+                       if(!empty($Upd_data)) echo $Upd_data->address; ?>{{Request::old('address')}}</textarea>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-sm-3 text">  
+                        <label>Description:</label>
+                    </div>
+                    <div class="col-sm-8">
+                      <textarea class="form-control" style="
+                height: 250px;" name="description" ><?php 
+                       if(!empty($Upd_data)) echo $Upd_data->description; ?>{{Request::old('description')}}</textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-offset-4">
+                        @if(!empty($Upd_data))
+                          <input type="hidden" name="ID" value="{{$Upd_data->id}}">
+                          <input type="hidden" name="flag" value="update">
+                          <input type="submit" class="btn btn-warning" value="Update">
+                          @else
+                          <input type="submit" class="btn btn-warning" value="Register">
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 right">
+                <h3>Weather Item </h3><hr>
+                
+                    <input type="checkbox" class="chk"  name="chk[]" value="summer">
+                    <label>Summer</label><br>
+                
+                    <input type="checkbox"  class="chk" name="chk[]" value="rainy">
+                    <label>Rainy</label>   <br>
+                
+                    <input type="checkbox"  class="chk" name="chk[]" value="winnter">
+                    <label>Winnter</label>
+                    <hr>
+                    <i> <b>Note</b>:<br> Please checked if you show season item </i>
+                    <br><br>
+            </div>
+        </div>
     </div>
 
     <!-- for table start -->
     <h3><i class="fa fa-bars" style="color: red;"></i>  <b> Submenu List</b></h3>
         <hr>
+    @if(!empty($Submenu))
+
     <div class="row">
         <div class="panel panel-primary filterable">
             <div class="panel-heading">
@@ -173,86 +216,13 @@
             </table>
         </div>
              {{ $Submenu->links() }}
+        @endif
 
     </div>
 
 </form>
 
-
-<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
- -->
- <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
-
-
-<div class="clearfix"></div>
-                
-            </div>
-            
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-      <div class="modal-dialog">
-    <div class="modal-content">
-          <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
-      </div>
-          <div class="modal-body">
-          <div class="form-group">
-        <input class="form-control " type="text" placeholder="Mohsin">
-        </div>
-        <div class="form-group">
-        
-        <input class="form-control " type="text" placeholder="Irshad">
-        </div>
-        <div class="form-group">
-        <textarea rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
-    
-        
-        </div>
-      </div>
-          <div class="modal-footer ">
-        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
-      </div>
-        </div>
-    <!-- /.modal-content --> 
-  </div>
-      <!-- /.modal-dialog --> 
-    </div>
-    
-    
-    
-    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-      <div class="modal-dialog">
-    <div class="modal-content">
-          <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
-      </div>
-          <div class="modal-body">
-       
-       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
-       
-      </div>
-        <div class="modal-footer ">
-        <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
-      </div>
-        </div>
-    <!-- /.modal-content --> 
-  </div>
-      <!-- /.modal-dialog --> 
-    </div>
-      
-
-
-</div>
-
+  
 <script type="text/javascript">
     
     
