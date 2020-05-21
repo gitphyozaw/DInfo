@@ -19,11 +19,11 @@ class submenuController extends Controller
 	    $all_menu = DB::table('dtb_menu')->where('status','1')->get();
 	    $all_submenu = DB::table('dtb_submenu')->where('status','1')->paginate(2);
 
-        $upd_data = Session::get('Upd_data');
-        $upd_data = isset($upd_data)? $upd_data : null;
+        //$upd_data = Session::get('Upd_data');
+        //$upd_data = isset($upd_data)? $upd_data : null;
 
 	    return view("Admin/submenuRegistration")
-        ->with('Upd_data',$upd_data)
+       // ->with('Upd_data',$upd_data)
 	    ->with('Menu',$all_menu)
 	    ->with('Submenu',$all_submenu);
 	}
@@ -98,11 +98,21 @@ class submenuController extends Controller
     {
 
         $upd_data = DB::table('dtb_submenu')->where('id',$id)->first();
-        Session::flash('Upd_data', $upd_data);
+       //Session::flash('Upd_data', $upd_data);
+        $season = explode(',', $upd_data->season);
+        $s0 = isset($season['0'])? $season['0'] :"other";
+        $s1 = isset($season['1'])? $season['1'] :"other";
+        
 
         $all_menu = DB::table('dtb_menu')->where('status','1')->get();
         $all_submenu = DB::table('dtb_submenu')->where('status','1')->paginate(2);
-        return redirect()->action('submenuController@index');
+        //return redirect()->action('submenuController@index');
+        return view("Admin/submenuRegistration")
+        ->with('Upd_data',$upd_data)
+        ->with('Season0',$s0)
+        ->with('Season1',$s1)
+        ->with('Menu',$all_menu)
+        ->with('Submenu',$all_submenu);
         }
 
     public function update($request,$id){

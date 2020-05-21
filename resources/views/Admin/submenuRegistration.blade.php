@@ -2,7 +2,10 @@
 @section('content')
  
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <link href="../css/admin.css" rel="stylesheet">
+
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="../js/admin.js"></script>
 <style type="text/css">
     .cor-head{
        width: 288px;
@@ -154,15 +157,31 @@
             </div>
             <div class="col-sm-3 right">
                 <h3>Weather Item </h3><hr>
-                
-                    <input type="checkbox" class="chk"  name="chk[]" value="summer">
-                    <label>Summer</label><br>
-                
-                    <input type="checkbox"  class="chk" name="chk[]" value="rainy">
-                    <label>Rainy</label>   <br>
-                
-                    <input type="checkbox"  class="chk" name="chk[]" value="winnter">
-                    <label>Winnter</label>
+                    @if(!empty($Upd_data))
+                        <input type="checkbox" class="chk"  name="chk[]" value="summer"
+                        <?php if($Season0 == "summer" || $Season1 == "summer") echo "checked" ?> >
+                        <label>Summer</label><br>
+                    
+                        <input type="checkbox"  class="chk" name="chk[]" value="rainy"
+                        <?php if($Season0 == "rainy" || $Season1 == "rainy") echo "checked"?> >
+
+                        <label>Rainy</label>   <br>
+                    
+                        <input type="checkbox"  class="chk" name="chk[]" value="winnter"
+                        <?php if($Season0 == "winnter" || $Season1 == "winnter") echo "checked"?> >
+
+                        <label>Winnter</label>
+                    @else
+                         <input type="checkbox" class="chk"  name="chk[]" value="summer" >
+                        <label>Summer</label><br>
+                    
+                        <input type="checkbox"  class="chk" name="chk[]" value="rainy">
+
+                        <label>Rainy</label>   <br>
+                    
+                        <input type="checkbox"  class="chk" name="chk[]" value="winnter"> 
+                        <label>Winnter</label>
+                        @endif
                     <hr>
                     <i> <b>Note</b>:<br> Please checked if you show season item </i>
                     <br><br>
