@@ -7,63 +7,44 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <link href="{{ asset('css/gallery.css') }}" rel="stylesheet">
-
-
-
-    <div class="container-fluid">
+<style type="text/css">
+    .pag{
+        margin-left: 18em;
+        font-size: 32px;
+    }
+    .pagination>li>a, .pagination>li>span {
+        border-radius: 2em;
+        margin-left: 8px;
+        width: 35px;
+    }
+</style>
+<div class="container-fluid">
     <div class="row shadow-lg p-3 mb-5 bg-white rounded">
         <div class="col-md-12 listing-block">
-         
+
+            @if(!empty($Pagoda))
+                @foreach($Pagoda as $pagoda)
+                <div class="media">
+                    <div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i>
+                    </div>
+                    <a href="{{url('/menu_pagoda_detail')}}">
+                        <img class="d-flex align-self-start" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRmwHCH6kB8aMr_gRcw7VTO7nKI67iINpOB4N07m7uF0sczuRTn&usqp=CAU" alt="Generic placeholder image">
+                    </a>
+                    <div class="media-body pl-3">
+                        <div class="price">{{$pagoda->name}}</div>
+                        <div class="stats">
+                            <span><i class="fa fa-arrows-alt"></i>1678 Sq ft</span>
+                            <span><i class="fa fa-bath"></i>2 Beadrooms</span>
+                        </div>
+                        <div class="address">4062 Walnut Hill Drive</div>
+                  </div>
+                </div>
+                @endforeach
+            <div class=" pag"> {{ $Pagoda->links() }}</div>
+            @endif
        
-        <div class="media">
-            <div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i>
-            </div>
-            <a href="{{url('/menu_pagoda_detail')}}">
-                <img class="d-flex align-self-start" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRmwHCH6kB8aMr_gRcw7VTO7nKI67iINpOB4N07m7uF0sczuRTn&usqp=CAU" alt="Generic placeholder image">
-            </a>
-              <div class="media-body pl-3">
-                <div class="price"> Pagoda name</div>
-                <div class="stats">
-                    <span><i class="fa fa-arrows-alt"></i>1678 Sq ft</span>
-                    <span><i class="fa fa-bath"></i>2 Beadrooms</span>
-                </div>
-                <div class="address">4062 Walnut Hill Drive
-            Cincinnati</div>
-              </div>
-            </div>
-        <div class="media">
-            
-            <div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i>
-</div>
-              <img class="d-flex align-self-start" src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?h=350&auto=compress&cs=tinysrgb" alt="Generic placeholder image">
-              <div class="media-body pl-3">
-                <div class="price">$506,400<small>New York</small></div>
-                <div class="stats">
-                    <span><i class="fa fa-arrows-alt"></i>1678 Sq ft</span>
-                    <span><i class="fa fa-bath"></i>2 Beadrooms</span>
-                </div>
-                <div class="address">4062 Walnut Hill Drive
-            Cincinnati</div>
-              </div>
-            </div>
-        <div class="media">
-            <div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i>
-</div>
-              <img class="d-flex align-self-start" src="https://images.pexels.com/photos/358636/pexels-photo-358636.jpeg?h=350&auto=compress&cs=tinysrgb" alt="Generic placeholder image">
-              <div class="media-body pl-3">
-                <div class="price">$506,400<small>New York</small></div>
-                <div class="stats">
-                    <span><i class="fa fa-arrows-alt"></i>1678 Sq ft</span>
-                    <span><i class="fa fa-bath"></i>2 Beadrooms</span>
-                </div>
-                <div class="address">4062 Walnut Hill Drive
-            Cincinnati</div>
-              </div>
-            </div>
+             
         </div>
-        <!-- <div class="col-md-7 map-box mx-0 px-0">
-            <iframe width="100%" height="495" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&815&sspn=8.047465,13.666992&ie=UTF8&hq=&hnear=15+Springfield+Way,+Hythe+CT21+5SH,+United+Kingdom&t=m&z=14&ll=51.077429,1.121722&output=embed"></iframe>
-        </div> -->
     </div>
 </div>
 

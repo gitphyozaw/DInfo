@@ -62,6 +62,9 @@
                 <li>
                     <a href="sugerencias"><i class="fa fa-gift"></i> Package</a>
                 </li>
+                 <li>
+                    <a href="sugerencias"><i class="fa fa-star-o"></i> Festivals</a>
+                </li>
                 <li>
                     <a href="sugerencias"><i class="fa fa-user"></i> User</a>
                 </li>

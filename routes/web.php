@@ -23,7 +23,8 @@ Route::get('/', function () {
 	Route::get('/admin_submenu', 'submenuController@index');
 
 /****/
-Route::get('/menu_pagoda', function () { return view('Menu.pagoda');});
+Route::get('/menu_pagoda', 'dInfoController@listPagoda');
+// Route::get('/menu_pagoda', function () { return view('Menu.pagoda');});
 	Route::get('/menu_pagoda_detail', function () { return view('Menu.pagoda_detail');});
 Route::get('/menu_beach', function () { return view('Menu.beach');});
 	Route::get('/menu_beach_detail', function () { return view('Menu.beach_detail');});
