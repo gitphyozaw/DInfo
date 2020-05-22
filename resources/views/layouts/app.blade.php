@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
 
 
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
@@ -40,15 +40,15 @@
 .menu {
   position: relative;
   display: inline-block;
-}
-
+} 
+.menu a:hover::after{background-color: red !important;}
 .sub-menu {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+
 }
 
 .sub-menu  a {
@@ -62,13 +62,20 @@
 
 .sub-menu a:hover {background-color: #ddd;}
 
-.menu:hover .sub-menu {display: block;}
-.book-a-table{background: #ffb03b;}
+.menu:hover .sub-menu {
+  display: block;
+  width: 1160px;
+  height: auto;
+  max-height: auto;
+  margin-left: -50em;
+  margin-top: 22px;
+}
+.book-a-table{background: #ffb03b;
+}
 #search{ 
-  width:450px;
-  height: 48px;
+  width:650px;
+  height: 70px;
   margin-bottom: 1em;
-  border-radius: 6px;
   cursor:pointer;  
    }
 .weather{
@@ -81,8 +88,29 @@
   padding: 20px;
 }
 a:active {
-  background-color: #2458af;
+  background-color: blue; 
   border-radius: 6px;
+}
+.img-fluid{
+  
+}
+.hov-img{
+  
+  margin:-1em;
+}
+.mt-4{
+  /*margin:-1em;*/
+  width: 300px;
+}
+.menu-header{
+ margin-top: -22px;
+}
+.card-footer>span{
+  color:#980a0afa;;
+  font-weight: bold;
+}
+.card-title{
+  text-decoration: underline;
 }
  
 
@@ -116,11 +144,115 @@ a:active {
           <li><a href="{{url('/')}}">Home</a></li>
           <li class="menu"><a href="#menu">Menu</a>
             <div class="sub-menu">
-              <a href="{{url('/menu_pagoda')}}">Pagoda</a>
-              <a href="{{url('/menu_beach')}}">Beache</a>
-              <a href="{{url('/menu_hotel')}}">Hotel</a>
-              <a href="{{url('/menu_restaurant')}}">Restaurant</a>
-              <a href="{{url('/menu_mountain')}}">Mountain</a>
+ 
+
+                <div class="row menu-header">
+                  <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                      <div class="card">
+                        <a href="{{url('/menu_pagoda')}}">
+                          <img  src="https://live.staticflickr.com/4402/36696146701_b06cf42d92_b.jpg" class="zoom img-fluid "  style="width: 270px;  height: 194px;">
+                        </a>
+                          <div class="card-block">
+                              <h4 class="card-title">Pagodas In Dawei</h4>
+                              <div class="meta">
+                                  <a href="#">Friends</a>
+                              </div>
+                              <div class="card-text">
+                                  Tawshif is a web designer 
+                              </div>
+                          </div>
+                          <div class="card-footer">
+
+                              <span><i class="fas fa-eye"></i>2 Views</span>
+                          </div>
+                      </div>
+                  </div>
+           <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                <div class="card">
+                  <a href="{{url('/gallery_beach')}}">
+                    <img  src="https://i1.wp.com/southernmyanmarplus.com/wp-content/uploads/2018/02/dawei-myanmar-61.jpg?resize=825%2C350&ssl=1" class="zoom img-fluid "  style="width: 250px;  height: 194px;">
+                  </a>
+                    <div class="card-block">
+                        <h4 class="card-title">Beaches In Dawei</h4>
+                        <div class="meta">
+                            <a href="#">Friends</a>
+                        </div>
+                        <div class="card-text">
+                            Tawshif is a web designer 
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        
+
+                        <span><i class="fas fa-eye"></i>2 Views</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                <div class="card">
+                  <a href="{{url('/gallery_hotel')}}">
+                    <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRKQz-lu4yIeF2PSIkE8z4LqcZyAmO8UySRiKfPiVLf8WItlWrN&usqp=CAU" class="zoom img-fluid "  style="width: 250px;  height: 194px;">
+                  </a>
+                    <div class="card-block">
+                        <h4 class="card-title">Hotels In Dawei</h4>
+                        <div class="meta">
+                            <a href="#">Friends</a>
+                        </div>
+                        <div class="card-text">
+                            Tawshif is a web designer 
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        
+
+                        <span><i class="fas fa-eye"></i>2 Views</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                <div class="card">
+                  <a href="{{url('/gallery_restaurant')}}">
+                     <img  src="https://images.pexels.com/photos/1038914/pexels-photo-1038914.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" class="zoom img-fluid "  style="width: 250px;  height: 194px;">
+                  </a>
+                    <div class="card-block">
+                        <h4 class="card-title">Restaurants and Shops In Dawei</h4>
+                        <div class="meta">
+                            <a href="#">Friends</a>
+                        </div>
+                        <div class="card-text">
+                            Tawshif is a web designer 
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        
+
+                        <span><i class="fas fa-eye"></i>2 Views</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                <div class="card">
+                  <a href="{{url('/gallery_mountain')}}">
+                     <img  src="https://images.pexels.com/photos/1038914/pexels-photo-1038914.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" class="zoom img-fluid "  style="width: 250px;  height: 194px;">
+                  </a>
+                    <div class="card-block">
+                        <h4 class="card-title">Mountains In Dawei</h4>
+                        <div class="meta">
+                            <a href="#">Friends</a>
+                        </div>
+                        <div class="card-text">
+                            Tawshif is a web designer 
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        
+
+                        <span><i class="fas fa-eye"></i>2 Views</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
             </div>
           </li>
           <li><a href="#events">Festivals</a></li>

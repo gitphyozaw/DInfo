@@ -1,31 +1,55 @@
 @extends('layouts.admin')
 @section('content')
 <style type="text/css">
-   .cor-head{
-       width: 236px;
-    margin-top: 2px;}
-    .btn{   
-     margin: 2px 0 0 -12px;
-     height: 36px; }
-     .error_msg{
-        color: red;
-     }
-     .swal-text {
-    font-size: 18px !important;
-    }
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,300);
+body {
+    font: 12px 'Open Sans';
+}
+.input-group {
+width: 494px;
+}
+/* File Upload */
+ 
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+}
+.fileUpload #logo-id {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 33px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.img-preview {
+    height: 200px;  
+    width:  280px;  
+}
+
+.cor-head{
+   width: 236px;
+margin-top: 2px;}
+.btn{   
+ margin: 2px 0 0 -12px;
+ height: 36px; }
+ .error_msg{
+    color: red;
+ }
+ .swal-text {
+font-size: 18px !important;
+}
 </style>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<!-- update model -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
- <!-- delete comfirm --> 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-
-<form action="{{url('/menu_registration')}}" method="post">
+<form action="{{url('/menu_registration')}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="container ">
         <div class="up jumbotron">
@@ -44,9 +68,7 @@
                     <div class="col-sm-6">
                        <input type="text" name="menu" class="form-control">
                     </div>
-                    <div class="col-sm-2">
-                        <input type="submit" class="btn btn-warning " value="Register">
-                    </div>
+                    
                 </div>
                 @if ($errors->any())
                     <div class="col-sm-offset-2 error_msg">
@@ -57,20 +79,26 @@
                         </ul>
                     </div>
                 @endif
+                <div class="row">
+                    <div class="col-sm-2 text">  
+                        <label>Upload Image:</label>
+                    </div>    
+                    <div class="col-sm-8">  
+                        <div class="input-group">
+                            <input id="fakeUploadLogo" type="file" 
+                            class="form-control  " placeholder="Choose File"  name="image">
+                             
+                      </div><br>    
+                      <div class="main-img-preview">
+                        <img class="thumbnail img-preview"  title="Preview Logo" alt="preview image">
+                      </div>
+                    </div>
+                 
+                </div>
+                <div class="col-sm-offset-5">
+                        <input type="submit" class="btn btn-warning " value="Register">
+                </div>
             <!-- <div class="row">
-                <div class="col-sm-2 text">  
-                    <label>Image Upload:</label>
-                </div>
-                <div class="col-sm-8">
-                    <fieldset class="form-group">
-                        <a href="javascript:void(0)" onclick="$('#pro-image').click()"><span class="btn btn-primary">Upload</span></a>
-                        <input type="file" id="pro-image" name="menu_image[]" style="display: none;" class="form-control" multiple>
-                    </fieldset>
-                    <div class="preview-images-zone ui-sortable "></div>
-                </div>
-            </div>
-
-            <div class="row">
                 <div class="col-sm-2 text">  
                     <label>Address:</label>
                 </div>
@@ -95,17 +123,16 @@
                         <thead>
                             <tr class="filters">
                                 <th></th>
-                                <th><input type="text" class="form-control" placeholder="#" disabled></th>
+                                <th><input type="text" class="form-control" placeholder="Image" disabled></th>
                                 <th><input type="text" class="form-control" placeholder="Menu Name" disabled></th>
                                 <th width='50px;'><label>Action</label></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i=1; ?>
                             @foreach ($Menu as $menu) 
                               <tr>
                                 <td></td>
-                                <td>{{$i++}}</td>
+                                <td>image</td>
                                 <td>{{$menu->name}}</td>
                                <!--  <td>
                                     <a href="" data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-pencil" style="font-size: 18px;"></span> </a>
@@ -154,6 +181,29 @@
 
 <script type="text/javascript">
 
+$(document).ready(function() {
+    var brand = document.getElementById('logo-id');
+    brand.className = 'attachment_upload';
+    brand.onchange = function() {
+        document.getElementById('fakeUploadLogo').value = this.value.substring(12);
+    };
+
+    // Source: http://stackoverflow.com/a/4459419/6396981
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function(e) {
+                $('.img-preview').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#logo-id").change(function() {
+        readURL(this);
+    });
+});
+
 $('div.alert').not('.alert-important').delay(3000).slideUp(300);
  /****for delete confirm****/ 
 
@@ -177,6 +227,11 @@ function edit(data) {
 // var name = $('#name').val();
 console.log(data);
 }
+
+
+
+
+
 </script>
    
 
