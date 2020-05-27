@@ -2,10 +2,10 @@
 @section('content')
  
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
- <link href="../css/admin.css" rel="stylesheet">
+ <link href="css/admin.css" rel="stylesheet">
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="../js/admin.js"></script>
+<script src="js/admin.js"></script>
 <style type="text/css">
     .cor-head{
        width: 288px;
@@ -41,7 +41,7 @@
     }
       
 </style>
-<form action="{{url('/submenu_registration')}}" method="post">
+<form action="{{url('/submenu_registration')}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="container shadow-lg p-3 mb-5 bg-white rounded">
         <div class="row">
@@ -103,8 +103,8 @@
                     </div>
                     <div class="col-sm-8">
                         <fieldset class="form-group">
-                            <a href="javascript:void(0)" onclick="$('#pro-image').click()"><span class="btn btn-primary">Upload</span></a>
-                            <input type="file" id="pro-image" name="pro-image[]" style="display: none;" class="form-control" multiple>
+                            <input type="hidden" name="img_hd" id="img_hd" value="">
+                            <input type="file" id="pro-image" name="pro-image[]"   class="form-control" multiple onclick="$('#pro-image').click()" value="">
                         </fieldset>
                         <div class="preview-images-zone ui-sortable "></div>
                     </div>
@@ -284,11 +284,10 @@ $(document).ready(function() {
 
 var num = 4;
 function readImage() {  
-
     if (window.File && window.FileList && window.FileReader) {
         var files = event.target.files; //FileList object
         var output = $(".preview-images-zone");
-
+        $("#img_hd").val() = 2;
         for (let i = 0; i < files.length; i++) {
             var file = files[i];
             if (!file.type.match('image')) continue;

@@ -1,14 +1,14 @@
 
 @extends('layouts.app')
 @section('content')
-<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
  <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
 <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script> -->
  
-  <link href="css/app.css" rel="stylesheet">
+  <link href="../css/app.css" rel="stylesheet">
 <link href="{{ asset('css/gallery.css') }}" rel="stylesheet"> 
 <script type="text/javascript" src="{{ asset('js/gallery.js') }}"></script>
  <style type="text/css">

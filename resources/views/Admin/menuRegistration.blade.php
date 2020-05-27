@@ -16,6 +16,7 @@ width: 494px;
     overflow: hidden;
 }
 .fileUpload #logo-id {
+
     position: absolute;
     top: 0;
     right: 0;
@@ -35,7 +36,7 @@ width: 494px;
    width: 236px;
 margin-top: 2px;}
 .btn{   
- margin: 2px 0 0 -12px;
+ margin: 0px 0 0 -12px;
  height: 36px; }
  .error_msg{
     color: red;
@@ -46,6 +47,8 @@ font-size: 18px !important;
 </style>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <link href="../css/admin.css" rel="stylesheet">
+
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
@@ -66,7 +69,8 @@ font-size: 18px !important;
                         <label>Menu Name:</label>
                     </div>
                     <div class="col-sm-6">
-                       <input type="text" name="menu" class="form-control">
+                       <input type="text" name="menu" class="form-control" value="{{old('menu')}}<?php 
+                       if(!empty($Upd_data)) echo $Upd_data->name; ?>">
                     </div>
                     
                 </div>
@@ -85,18 +89,37 @@ font-size: 18px !important;
                     </div>    
                     <div class="col-sm-8">  
                         <div class="input-group">
-                            <input id="fakeUploadLogo" type="file" 
-                            class="form-control  " placeholder="Choose File"  name="image">
+                            <input id="fakeUploadLogo" readonly="readonly" 
+                            class="form-control  " placeholder="Choose File"  name="image" value="{{old('image')}}<?php 
+                       if(!empty($Upd_data)) echo $Upd_data->image; ?>">
+                            <div class="input-group-btn">
+                              <div class="fileUpload btn btn-danger fake-shadow">
+                                <span><i class="glyphicon glyphicon-upload"></i> Upload</span>
+                                <input id="logo-id" name="image" type="file" class="attachment_upload">
+                              </div>
+                            </div>
                              
                       </div><br>    
                       <div class="main-img-preview">
-                        <img class="thumbnail img-preview"  title="Preview Logo" alt="preview image">
+                       
+                    @if(!empty($Upd_data))
+                        <img  src="../uploadedimages/menu/{{$Upd_data->image}}"  
+                        class="thumbnail img-preview" id="logo-id" title="Preview Logo" alt="logo image">
+                    @else
+                         <img class="thumbnail img-preview" id="logo-id" title="Preview Logo" alt="preview image">
+                    @endif
                       </div>
                     </div>
                  
                 </div>
                 <div class="col-sm-offset-5">
+                    @if(!empty($Upd_data))
+                        <input type="hidden" name="ID" value="{{$Upd_data->id}}">
+                        <input type="hidden" name="flag" value="update">
+                        <input type="submit" class="btn btn-warning " value="Update">
+                    @else
                         <input type="submit" class="btn btn-warning " value="Register">
+                    @endif
                 </div>
             <!-- <div class="row">
                 <div class="col-sm-2 text">  
@@ -110,7 +133,7 @@ font-size: 18px !important;
         </div>
 
             <!-- for table start -->
-
+        @if(!empty($Menu))
             <h3><i class="fa fa-bars" style="color: red;"></i>  <b> Menu List</b></h3>
             <hr>
             <div class="row">
@@ -132,11 +155,12 @@ font-size: 18px !important;
                             @foreach ($Menu as $menu) 
                               <tr>
                                 <td></td>
-                                <td>image</td>
+                                <td><img src="../public/uploadedimages/menu/{{$menu->image}}" alt="img" style="width: 80px; height: 40px;"></td>
                                 <td>{{$menu->name}}</td>
-                               <!--  <td>
-                                    <a href="" data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-pencil" style="font-size: 18px;"></span> </a>
-                                </td> -->
+                                <td>
+                                     
+                                    <a href="{{url('/menu_edit', $menu->id)}}"   ><span class="glyphicon glyphicon-pencil" style="font-size: 18px;"></span> </a>
+                                </td>
                                 <td>
                                      <a href="{{url('/menu_delete', $menu->id)}}" class="delete-confirm"><span class="glyphicon glyphicon-trash" style="font-size: 18px; color:red;" ></span></a>
                                 </td>
@@ -152,16 +176,12 @@ font-size: 18px !important;
                     </table>
                 </div>
             </div>
+        @endif
     </div><!-- end container -->
 </form>
 
-
-<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
-
-
- <!-- <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script> -->
-
+ <!-- for delete comfirm box -->
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <div class="clearfix"></div>
 
@@ -170,10 +190,6 @@ font-size: 18px !important;
         </div>
     </div>
 </div>
-
-
-
-
  
 
 
@@ -222,11 +238,6 @@ $('.delete-confirm').on('click', function (event) {
     });
 });
 
-function edit(data) {
-//  var id = data.val();
-// var name = $('#name').val();
-console.log(data);
-}
 
 
 

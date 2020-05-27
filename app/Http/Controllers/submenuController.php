@@ -33,7 +33,7 @@ class submenuController extends Controller
      * @return \Illuminate\Http\Response
      */
    	public function submenuInsert(Request $request){
-
+dd($request);die;
         $this->validate($request, [
            'submenu' => 'required'
        ]);
@@ -51,15 +51,19 @@ class submenuController extends Controller
                 $menu_id = isset($menu['0'])? $menu['0'] : null;
                 $menu_type = isset($menu['1'])? $menu['1'] :null;
             }
-
-            if(!empty(count($chk) == 3)){
-               $season = "other";
-            }else if(!empty(count($chk) == 2)){
-               $season = $chk['0'].",".$chk['1'];
+            if(!empty($chk)){
+                if(count($chk) == 3){
+                    $season = "other";
+                }else if(count($chk) == 2){
+                   $season = $chk['0'].",".$chk['1'];
+                }
+                else{
+                    $season = $chk['0'];
+                }
+            }else {
+                $season = null;
             }
-            else{
-                $season = $chk['0'];
-            }
+            
 
             $submenu_data = array(
                 'menu_id'       => $menu_id ,
@@ -163,7 +167,8 @@ class submenuController extends Controller
     public function destroy(Request $request,$id)
     {
          try{
-             DB::table('dtb_submenu')->delete($id);
+            DB::table('dtb_submenu')->where('id',$id)->update(["status"=>0]);
+             //DB::table('dtb_submenu')->delete($id);
             $request->session()->flash('alert-success', 'Delete successful!');
         }catch (\Exception $e) {
 
