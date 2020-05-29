@@ -2,10 +2,10 @@
 @section('content')
  
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
- <link href="css/admin.css" rel="stylesheet">
+ <link href="../css/admin.css" rel="stylesheet">
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="js/admin.js"></script>
+<script src="../js/admin.js"></script>
 <style type="text/css">
     .cor-head{
        width: 288px;
@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-sm-8">
                         <fieldset class="form-group">
-                            <input type="hidden" name="img_hd" id="img_hd" value="">
+                            <input type="hidden" name="img_hd[]" id="img_hd">
                             <input type="file" id="pro-image" name="pro-image[]"   class="form-control" multiple onclick="$('#pro-image').click()" value="">
                         </fieldset>
                         <div class="preview-images-zone ui-sortable "></div>
@@ -277,42 +277,71 @@ $(document).ready(function() {
     
 
 /***END Toggle***/
-
-
-
-
-
-var num = 4;
+ 
+var num = 6;
+var imgArr      = [];
+var fileName    ="";
+         
 function readImage() {  
     if (window.File && window.FileList && window.FileReader) {
         var files = event.target.files; //FileList object
         var output = $(".preview-images-zone");
-        $("#img_hd").val() = 2;
-        for (let i = 0; i < files.length; i++) {
-            var file = files[i];
-            if (!file.type.match('image')) continue;
-            
-            var picReader = new FileReader();
-            
-            picReader.addEventListener('load', function (event) {
-                var picFile = event.target;
-                var html =  '<div class="preview-image preview-show-' + num + '">' +
-                            '<div class="image-cancel" data-no="' + num + '">x</div>' +
-                            '<div class="image-zone"><img id="pro-img-' + num + '" src="' + picFile.result + '"></div>' +
-                            '<div class="tools-edit-image"><a href="javascript:void(0)" data-no="' + num + '" class="btn btn-light btn-edit-image">edit</a></div>' +
-                            '</div>';
 
-                output.append(html);
-                num = num + 1;
+        var processed_file_names = [];
+        var form = document.querySelector('form');
+        var data = new FormData(form);// Create an FormData object 
+        $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+            });
+            $.ajax({
+                type: "POST",
+                async: false,
+                enctype: 'multipart/form-data',
+                url:"{{ URL::to('storeImage') }}",
+
+                data:data, processData: false, contentType: false, cache: false, dataType: 'json',
+                success: function (data) {                  
+                    $.each(data, function ($k, $v) {
+                        processed_file_names[$k] = $v;
+                    });                 
+                },
+                error: function (r) { console.log(r); }
             });
 
-            picReader.readAsDataURL(file);
-        }
+            for (let i = 0; i < files.length; i++) {
+                var file = files[i];
+                if (!file.type.match('image')) continue;
+     
+                data.append('pro-image[]', file, file.name);
+                var picReader = new FileReader();
+                
+                picReader.addEventListener('load', function (event) {
+                    var picFile = event.target;
+                    var html =  '<div class="preview-image preview-show-' + num + '">' +
+                                /*'<div class="image-cancel" id="img_del"  data-no="' + num + '">x</div>' +*/
+                                '<div class="image-zone"><img id="pro-img-' + num + '" src="' + picFile.result + '"></div>' ;
+
+
+                    output.append(html);
+                    num = num + 1;
+                });
+
+                picReader.readAsDataURL(file);
+            }
+            
+            for(var i=0;i<files.length;i++)
+            {
+                var fileName = processed_file_names[i];
+                imgArr.push(fileName) ;
+                document.getElementById('img_hd').value = imgArr; 
+            }
+
         $("#pro-image").val('');
     } else {
         console.log('Browser not support');
     }
 }
+
 $('div.alert').not('.alert-important').delay(3000).slideUp(300);
 </script>
 

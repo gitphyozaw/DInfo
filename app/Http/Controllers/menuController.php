@@ -36,6 +36,7 @@ class menuController extends Controller
             $this->menuUpdate($request,$id);
              $upd_data = DB::table('dtb_menu')->where('id',$id)->first();
         $all_menu = DB::table('dtb_menu')->where('status','1')->get();
+        
         return view("Admin/menuRegistration")
         ->with('Upd_data',$upd_data)
         ->with('Menu',$all_menu);

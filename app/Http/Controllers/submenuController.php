@@ -27,13 +27,38 @@ class submenuController extends Controller
 	    ->with('Menu',$all_menu)
 	    ->with('Submenu',$all_submenu);
 	}
+
+    /**
+     * @desc   store image into folder
+     * @param  \Illuminate\Http\Request  $request->file
+     * @return \Illuminate\Http\Response
+     * @author phyozaw@5/29/2020
+     */
+     public function storeImage(Request $request )
+    {   
+        /********store into folder********/
+        $new_names = [];
+        if($request->hasfile('pro-image'))
+        {           
+            foreach ($request->file('pro-image') as $key => $value) {
+                 $imageName = $value->getClientOriginalName();
+                    $value->move(public_path('/uploadedimages/submenu'), $imageName);
+                    $new_names[$key] = $imageName;
+            }//endforeach 
+        }
+        echo json_encode($new_names);
+         /********remove from upload folder********/
+        /*if(!empty($request['filename'])){
+            unlink(base_path()."/../html/upload/save_image/".$request['name']);
+        }*/
+    }
+
 	/**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
    	public function submenuInsert(Request $request){
-dd($request);die;
         $this->validate($request, [
            'submenu' => 'required'
        ]);
@@ -44,46 +69,66 @@ dd($request);die;
             $this->update($request,$id);
 
         }else{//insert
-            $sel_menu = $request['menu'];
-            $chk  = $request['chk'];
-            $menu = explode(',', $sel_menu);
-            if(!empty($menu)){
-                $menu_id = isset($menu['0'])? $menu['0'] : null;
-                $menu_type = isset($menu['1'])? $menu['1'] :null;
-            }
-            if(!empty($chk)){
-                if(count($chk) == 3){
-                    $season = "other";
-                }else if(count($chk) == 2){
-                   $season = $chk['0'].",".$chk['1'];
-                }
-                else{
-                    $season = $chk['0'];
-                }
-            }else {
-                $season = null;
-            }
-            
-
-            $submenu_data = array(
-                'menu_id'       => $menu_id ,
-                'title'         => $request['title'] ,
-                'name'          => $request['submenu'] ,
-                'address'       => $request['address'] ,
-                'description'   => $request['description'] ,
-                'menu_type'     => $menu_type,
-                'season'        => $season,
-                'status'        => 1,
-                'created_date'  =>date('Y-m-d H:i:s'),
-                'updated_date'  =>date('Y-m-d H:i:s')
-
-                 );
-
+            DB::beginTransaction();
             try{
-                DB::table('dtb_submenu')->insert($submenu_data);
+
+                $sel_menu = $request['menu'];
+                $chk  = $request['chk'];
+                $menu = explode(',', $sel_menu);
+                if(!empty($menu)){
+                    $menu_id = isset($menu['0'])? $menu['0'] : null;
+                    $menu_type = isset($menu['1'])? $menu['1'] :null;
+                }
+                if(!empty($chk)){
+                    if(count($chk) == 3){
+                        $season = "other";
+                    }else if(count($chk) == 2){
+                       $season = $chk['0'].",".$chk['1'];
+                    }
+                    else{
+                        $season = $chk['0'];
+                    }
+                }else {
+                    $season = null;
+                }
+                
+
+                $submenu_data = array(
+                    'menu_id'       => $menu_id ,
+                    'title'         => $request['title'] ,
+                    'name'          => $request['submenu'] ,
+                    'address'       => $request['address'] ,
+                    'description'   => $request['description'] ,
+                    'menu_type'     => $menu_type,
+                    'season'        => $season,
+                    'status'        => 1,
+                    'created_date'  =>date('Y-m-d H:i:s'),
+                    'updated_date'  =>date('Y-m-d H:i:s')
+
+                     );
+
+                
+                    DB::table('dtb_submenu')->insert($submenu_data);
+                    $max_id  =  DB::table('dtb_submenu')->select('id')->max('id');
+                    if(!empty($request["img_hd"][0])){
+                         
+                        $image = explode(',', $request["img_hd"][0]);
+                         
+                        foreach ($image as $value) {
+                            $type = explode('.', $value);
+                            $submenu_image = array(
+                            'submenu_id'      => $max_id ,
+                            'name'            => $value ,
+                            'type'            => $type[1] 
+                             );
+
+                            DB::table('dtb_submenu_image')->insert($submenu_image);
+                        }
+                    }
+                DB::commit();
                 $request->session()->flash('alert-success', 'Save successful!');
             }catch (\Exception $e) {
-
+                DB::rollback();
                 return $e->getMessage();
             }
         }

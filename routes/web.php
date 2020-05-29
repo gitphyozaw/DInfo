@@ -53,6 +53,9 @@ Route::post('/submenu_registration', 'submenuController@submenuInsert');
 	Route::get('/submenu_delete/{id}', 'submenuController@destroy');
 	Route::get('/submenu_edit/{id}', 'submenuController@submenuEdit');
 
+	/***for image upload***/
+	Route::post('/deleteImage', 'submenuController@deleteImage');
+    Route::post('/storeImage', 'submenuController@storeImage');
 
 
 //Route::get('/delete/{id}', 'SchoolController@delete')->name('delete');
