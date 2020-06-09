@@ -54,7 +54,7 @@ Route::post('/submenu_registration', 'submenuController@submenuInsert');
 	Route::get('/submenu_edit/{id}', 'submenuController@submenuEdit');
 
 	/***for image upload***/
-	Route::post('/deleteImage', 'submenuController@deleteImage');
+	Route::get('/deleteImage/{id}', 'submenuController@deleteImage');
     Route::post('/storeImage', 'submenuController@storeImage');
 
 

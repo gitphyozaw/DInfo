@@ -118,7 +118,7 @@ class submenuController extends Controller
                             $type = explode('.', $value);
                             $submenu_image = array(
                             'submenu_id'      => $max_id ,
-                            'name'            => $value ,
+                            'image'            => $value ,
                             'type'            => $type[1] 
                              );
 
@@ -146,13 +146,20 @@ class submenuController extends Controller
     public function submenuEdit($id)
     {
 
-        $upd_data = DB::table('dtb_submenu')->where('id',$id)->first();
-       //Session::flash('Upd_data', $upd_data);
-        $season = explode(',', $upd_data->season);
-        $s0 = isset($season['0'])? $season['0'] :"other";
-        $s1 = isset($season['1'])? $season['1'] :"other";
-        
-
+        $upd_data = DB::table('dtb_submenu')->where('dtb_submenu.id',$id)->first();
+        $edit_img = DB::table('dtb_submenu_image')->where('submenu_id',$id)->get();
+        /**for season check vaildate**/
+        if(!empty($upd_data->season)){
+            $season = explode(',', $upd_data->season);
+            $s0 = isset($season['0'])? $season['0'] :"other";
+            $s1 = isset($season['1'])? $season['1'] :"other";
+            
+        }else{
+            $s0 = null;
+            $s1 = null;
+        }
+        /***end***/
+ 
         $all_menu = DB::table('dtb_menu')->where('status','1')->get();
         $all_submenu = DB::table('dtb_submenu')->where('status','1')->paginate(2);
         //return redirect()->action('submenuController@index');
@@ -160,6 +167,7 @@ class submenuController extends Controller
         ->with('Upd_data',$upd_data)
         ->with('Season0',$s0)
         ->with('Season1',$s1)
+        ->with('Edit_img',$edit_img)
         ->with('Menu',$all_menu)
         ->with('Submenu',$all_submenu);
         }
@@ -174,14 +182,18 @@ class submenuController extends Controller
                 $menu_id = isset($menu['0'])? $menu['0'] : null;
                 $menu_type = isset($menu['1'])? $menu['1'] :null;
             }
-            if(!empty(count($chk) == 3)){
+        if(!empty($chk)){
+            if(count($chk) == 3){
                $season = "other";
-            }else if(!empty(count($chk) == 2)){
+            }else if(count($chk) == 2){
                $season = $chk['0'].",".$chk['1'];
             }
             else{
                 $season = $chk['0'];
             }
+        }else{
+             $season = "other"; 
+        }
 
 
         $update_data = array(
@@ -197,12 +209,50 @@ class submenuController extends Controller
              );
         try{
             DB::table('dtb_submenu')->where('id',$id)->update($update_data);
+            if(!empty($request["img_hd"][0])){
+                        $image = explode(',', $request["img_hd"][0]);
+                         
+                        foreach ($image as $value) {
+                            $type = explode('.', $value);
+                            $submenu_image = array(
+                            'submenu_id'      => $id ,
+                            'image'            => $value ,
+                            'type'            => $type[1] 
+                             );
+
+                            DB::table('dtb_submenu_image')->insert($submenu_image);
+                        }
+                    }
             $request->session()->flash('alert-success', 'Update successful!');
             }catch (\Exception $e) {
 
                 return $e->getMessage();
             }
-    }
+    } 
+    
+    /**
+     * @desc    edit delete image from image table
+     * @author  phyozaw@2019/09/
+     * @param   Request $request
+     * @return  $data
+     */ 
+     public function deleteImage(Request $request){
+        $id = $request->id;
+        if ($id) {
+            $db_filename = DB::table('dtb_submenu_image')->where('id',$id )->first();
+
+            try {
+         
+                unlink(public_path('/uploadedimages/submenu/').$db_filename->image);
+            }
+            catch (\Exception $e) {
+            }
+            DB::table('dtb_submenu_image')->where('id',$id)->delete();
+
+            return back();
+        }
+         
+     }
     /**
      * Remove the specified resource from storage.
      *

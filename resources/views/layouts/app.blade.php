@@ -112,13 +112,114 @@ a:active {
 .card-title{
   text-decoration: underline;
 }
+ #snow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1000;
+}
+
  
 
+.rain {
+  position: inherit;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+ 
+
+.drop {
+  position: absolute;
+  bottom: 80%;
+  width: 20px;
+  height: 120px;
+  pointer-events: none;
+  animation: drop 1s linear infinite;
+}
+
+@keyframes drop {
+
+  0% {
+    transform: translateY(0vh);
+  }
+  75% {
+    transform: translateY(70vh);
+  }
+  100% {
+    transform: translateY(68vh);
+  }
+}
+
+.stem {
+  width: 7px;
+  height: 50%;
+  margin-left: 7px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.25));
+  animation: stem 0.5s linear infinite;
+  
+}
+
+@keyframes stem {
+  0% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.splat {
+  width: 15px;
+  height: 10px;
+  border-top: 2px dotted rgba(255, 255, 255, 0.5);
+  border-radius: 70%;
+  opacity: 1;
+  transform: scale(0);
+  animation: splat 1s linear infinite;
+  display: none;
+  background-color: #8d87e052;
+
+}
+
+body.splat-toggle .splat {
+  display: block;
+}
+
+@keyframes splat {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  90% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+ 
   </style>
 
 </head>
 
-<body id="app-layout">
+<body id="app-layout" class="back-row-toggle splat-toggle">
    <!-- ======= Top Bar ======= -->
   <section id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
     <div class="container text-right">
@@ -265,9 +366,12 @@ a:active {
 
     </div>
   </header><!-- End Header -->
-
+<div id="snow"></div>
+<div class="rain front-row"></div>
+  
+ 
   <!-- ======= Hero Section ======= -->
-  <section id="hero">
+  <section id="hero" >
     <div class="hero-container">
       <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
 
@@ -349,6 +453,7 @@ a:active {
     </div>
   </footer><!-- End Footer -->
 
+
     <!-- Vendor JS Files -->
 
   <script src="assets/vendor/jquery/jquery.min.js"></script>
@@ -364,7 +469,8 @@ a:active {
 
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+
+<script src="assets/js/main.js"></script>
 <script type="text/javascript">
   $( document ).ready(function() {
    
@@ -374,32 +480,124 @@ a:active {
          $(".season1").css('color','#dd3524 ');
       }else if(mm <= 07 || mm <= 10){
          $(".season2").css('color','#1c5680');
+          makeItRain();
       }else{
          $(".season3").css('color','#f1f1f1');
-
+          fallingSnow(); 
       }
    
   });
+
   $('.season1').on('click',function(){
             $(this).css('color','blue');
             $(".season2").css('color','#7b93a3');
             $(".season3").css('color','#7b93a3');
+
      });
   $('.season2').on('click',function(){
             $(this).css('color','blue');
             $(".season1").css('color','#7b93a3');
             $(".season3").css('color','#7b93a3');
+           
      });
   $('.season3').on('click',function(){
             $(this).css('color','blue');
             $(".season1").css('color','#7b93a3');
             $(".season2").css('color','#7b93a3');
      });
+
+
   function googleTranslateElementInit() {
     new google.translate.TranslateElement({pageLanguage: 'en,my',includedLanguages: 'en,my'}, 'google_translate_element');
   }
 
-    
+  function fallingSnow(){
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+    script.onload = function(){
+      
+      $(".box").css("box-shadow", "0px 2px 5px rgba(236, 114, 9, 0.9)");
+        particlesJS("snow", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 400
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false
+                    }
+                },
+                "size": {
+                    "value": 5,
+                    "random": true,
+                    "anim": {
+                        "enable": false
+                    }
+                },
+                "line_linked": {
+                    "enable": false
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "bottom",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": true,
+                        "rotateX": 300,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "events": {
+                    "onhover": {
+                        "enable": false
+                    },
+                    "onclick": {
+                        "enable": false
+                    },
+                    "resize": false
+                }
+            },
+            "retina_detect": true
+        });
+    }
+    document.head.append(script);
+}
+  
+
+ var makeItRain = function() {
+
+  $('.rain').empty();
+  var increment = 0;
+  var drops = "";
+ 
+  while (increment < 100) {
+    //couple random numbers to use for various randomizations
+    //random number between 98 and 1
+    var randoHundo = (Math.floor(Math.random() * (98 - 1 + 1) + 1));
+    //random number between 5 and 2
+    var randoFiver = (Math.floor(Math.random() * (5 - 2 + 1) + 2));
+    increment += randoFiver;
+    drops += '<div class="drop" style="left: ' + increment + '%; bottom: ' + (randoFiver + randoFiver - 1 + 100) + '%; animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"><div class="stem" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div><div class="splat" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div></div>';
+      }
+
+  $('.rain.front-row').append(drops);
+  //$('.rain.back-row').append(backDrops);
+}
 
 </script>
 

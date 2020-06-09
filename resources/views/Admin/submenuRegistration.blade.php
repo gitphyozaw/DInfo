@@ -39,6 +39,36 @@
         width: 18px !important;    
         height: 18px !important;    
     }
+    .test {
+    position: relative;
+    float: left;
+}
+a.remImage img {
+
+    box-shadow: none;
+    position: absolute;
+    right: 7px;
+    top: -5px;
+    margin-top: 4px;
+    opacity: 0;
+    display: block;
+    transition: all .5s ease-in-out;
+}
+.test:hover a.remImage img {
+    opacity: 1;
+    z-index: 99;
+    position: absolute;
+    top: 20px;
+    right: 40px;
+}
+ 
+.test:hover:after{
+    opacity: 3;
+}
+.edit_img{
+    padding-right: 4px;
+}
+
       
 </style>
 <form action="{{url('/submenu_registration')}}" method="post" enctype="multipart/form-data">
@@ -106,7 +136,19 @@
                             <input type="hidden" name="img_hd[]" id="img_hd">
                             <input type="file" id="pro-image" name="pro-image[]"   class="form-control" multiple onclick="$('#pro-image').click()" value="">
                         </fieldset>
-                        <div class="preview-images-zone ui-sortable "></div>
+                        <div class="preview-images-zone ui-sortable ">
+                             @if(!empty($Edit_img))
+                                @foreach($Edit_img as $val)
+                                      
+                                            <div class="test" id="test">
+                                           <img src="../uploadedimages/submenu/{{$val->image}}" alt="img"  width="120px" height="90px" class="edit_img" >
+                                            <a class="remImage" href="{{url('/deleteImage', $val->id)}}"  id="delete">
+                                                <img src="..\assets\img\del_icon.svg" style="width:40px;height:40px;">
+                                            </a>   
+                                        </div>
+                                @endforeach
+                            @endif
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -319,7 +361,7 @@ function readImage() {
                     var picFile = event.target;
                     var html =  '<div class="preview-image preview-show-' + num + '">' +
                                 /*'<div class="image-cancel" id="img_del"  data-no="' + num + '">x</div>' +*/
-                                '<div class="image-zone"><img id="pro-img-' + num + '" src="' + picFile.result + '"></div>' ;
+                                '<div class="image-zone"><img  id="pro-img-' + num + '" src="' + picFile.result + '"></div>' ;
 
 
                     output.append(html);
