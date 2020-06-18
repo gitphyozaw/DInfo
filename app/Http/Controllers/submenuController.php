@@ -114,12 +114,18 @@ class submenuController extends Controller
                          
                         $image = explode(',', $request["img_hd"][0]);
                          
-                        foreach ($image as $value) {
+                        foreach ($image as $key => $value) {
                             $type = explode('.', $value);
+                            if($key == 0){
+                                $type  = "logo";
+                            }else{
+                                $type = $type[1];
+                            }
+
                             $submenu_image = array(
                             'submenu_id'      => $max_id ,
                             'image'            => $value ,
-                            'type'            => $type[1] 
+                            'type'            => $type 
                              );
 
                             DB::table('dtb_submenu_image')->insert($submenu_image);

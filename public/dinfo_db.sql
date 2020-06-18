@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2020-05-29 10:30:38
+-- 生成日時: 2020-06-18 06:49:21
 -- サーバのバージョン： 10.4.11-MariaDB
--- PHP のバージョン: 7.4.6
+-- PHP のバージョン: 7.3.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -85,7 +85,7 @@ INSERT INTO `dtb_submenu` (`id`, `menu_id`, `title`, `name`, `address`, `descrip
 CREATE TABLE `dtb_submenu_image` (
   `id` int(11) NOT NULL,
   `submenu_id` int(11) NOT NULL,
-  `name` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `image` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `type` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -93,7 +93,7 @@ CREATE TABLE `dtb_submenu_image` (
 -- テーブルのデータのダンプ `dtb_submenu_image`
 --
 
-INSERT INTO `dtb_submenu_image` (`id`, `submenu_id`, `name`, `type`) VALUES
+INSERT INTO `dtb_submenu_image` (`id`, `submenu_id`, `image`, `type`) VALUES
 (1, 17, 'about.jpg', 'jpg'),
 (2, 17, 'apple-touch-icon.png', 'png'),
 (3, 17, 'chefs-bg.jpg', 'jpg');
