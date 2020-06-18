@@ -70,14 +70,14 @@
   margin-left: -50em;
   margin-top: 22px;
 }
-.book-a-table{background: #ffb03b;
+.btn-menu{
+  width:240px !important; 
+  height: 60px !important;
+  border-radius: 1px !important; 
+  font-size: 16px !important;
+  
 }
-#search{ 
-  width:650px;
-  height: 70px;
-  margin-bottom: 1em;
-  cursor:pointer;  
-   }
+
 .weather{
   font-size: 22px;
   color: #fff;
@@ -214,8 +214,63 @@ body.splat-toggle .splat {
     transform: scale(1.5);
   }
 }
- 
+
+/*autocomplete */
+#search{ 
+  width:650px;
+  height: 70px;
+  margin-bottom: -4px;
+  cursor:pointer;  
+   }
+#submenu_list{
+  background-color: white;  
+  margin-left: 270px;
+  border-radius: none;
+
+}
+#submenu_list >ul{
+  width: 650px;
+  height: 700px;
+  overflow-y: auto;
+}
+ .complete_li{
+  border-bottom: 1px solid #fff34322;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+ }
+ .complete_desc{
+  float: right;
+ }
+#hero #submenu_list h3{
+  color:#000000;
+  font-family: Lucida Fax;
+}
+#hero #submenu_list img{
+  margin-top: 29px;
+}
+ #hero #submenu_list p {
+    width: 100%;
+    color: rebeccapurple;
+    word-spacing: 4px;
+}
+ .address-row{
+  margin-top: -22px;
+ }
+ .address-img{
+  margin-top: -30px;
+ }
+address{
+  color: #000;
+  
+  float: right; 
+  }
+.address_img {
+  width: 30px !important;
+  height: 30px;
+  
+}
   </style>
+
+
 
 </head>
 
@@ -398,10 +453,11 @@ body.splat-toggle .splat {
                   </div>
                   <div class="input-field  ">
                     <input id="search" class="animated fadeInDown scrollto" type="text" placeholder="@please enter Keywords" aria-label="Search">
+                    <div id="submenu_list"> </div>
                   </div>
                   <!-- <a href="#menu" id="search" class="btn-menu animated fadeInDown scrollto"><span class="fa fa-search search__icon"></span></a><br><br> -->
 
-                  <a href="#menu" class="btn-menu book-a-table text-center" >Book A Package</a>
+                  <a href="#menu" class="btn-menu  text-center" >Book A Package</a>
 
                  
                 </div>
@@ -466,7 +522,8 @@ body.splat-toggle .splat {
   <!-- <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+ 
 
   <!-- Template Main JS File -->
 
@@ -486,7 +543,36 @@ body.splat-toggle .splat {
           fallingSnow(); 
       }
    
+
+
+      $('#search').keyup(function(){ 
+        var query = $(this).val();
+        if(query != '')
+        {
+           var _token = $('input[name="_token"]').val();
+           $.ajax({
+            url:"{{ route('autocomplete') }}",
+            method:"POST",
+            data:{query:query, _token:_token},
+            success:function(data){
+             $('#submenu_list').fadeIn();  
+             $('#submenu_list').html(data);
+            },
+
+           });
+        }else{
+          $('#submenu_list').fadeOut();
+        }
+      });
+
+      $(document).on('click', 'li', function(){  
+          //$('#search').val($(this).text());  
+          $('#submenu_list').fadeOut();  
+      });   
+
   });
+
+     
 
   $('.season1').on('click',function(){
             $(this).css('color','blue');

@@ -44,7 +44,7 @@ Route::get('/gallery_restaurant', function () { return view('Gallery.restaurant_
 Route::get('/gallery_mountain', function () { return view('Gallery.mountain');});
 	Route::get('/gallery_mountain_detail', function () { return view('Gallery.mountain_detail');});
 
-/****Registration****/	
+/****Admin Registration****/	
 
 Route::post('/menu_registration', 'menuController@create');
 	Route::get('/menu_delete/{id}', 'menuController@destroy');
@@ -56,6 +56,11 @@ Route::post('/submenu_registration', 'submenuController@submenuInsert');
 	/***for image upload***/
 	Route::get('/deleteImage/{id}', 'submenuController@deleteImage');
     Route::post('/storeImage', 'submenuController@storeImage');
+/**************end***********/
+
+/***D info***/
+//Route::get('autocomplete', 'home/homeController@autocomplete')->name('autocomplete');
+Route::post('/autocomplete', 'homeController@autocomplete')->name('autocomplete');
 
 
-//Route::get('/delete/{id}', 'SchoolController@delete')->name('delete');
+/**************end***********/
