@@ -148,16 +148,16 @@ a:active {
     transform: translateY(0vh);
   }
   75% {
-    transform: translateY(70vh);
+    transform: translateY(78vh);
   }
   100% {
-    transform: translateY(68vh);
+    transform: translateY(72vh);
   }
 }
 
 .stem {
   width: 7px;
-  height: 50%;
+  height: 78%;
   margin-left: 7px;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.25));
   animation: stem 0.5s linear infinite;
@@ -534,6 +534,7 @@ address{
       var today = new Date();
       var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
       if(mm >= 03 || mm <= 06){
+          
          $(".season1").css('color','#dd3524 ');
       }else if(mm <= 07 || mm <= 10){
          $(".season2").css('color','#1c5680');
