@@ -62,7 +62,6 @@ $("#gallery").fadeTo(300, 1);
 <!-- Grid row -->
 <div class="container ">
     <div class="gallery_row_header">
-
       <!-- Grid column -->
       <div class="col-md-12 d-flex justify-content-center mb-5">
 
