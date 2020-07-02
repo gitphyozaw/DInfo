@@ -16,7 +16,7 @@ span img{ width: 51px; height: 50px;}
     font-family: "Satisfy", sans-serif;
 }
 .gallery_row_header{ height: 146px;    margin-top: 24px;}
-.waves-effect{width: 69px;}
+.waves-effect{width: 74px;}
 .icon_img{height: 116px !important;}
 .nav-link {
     padding: 0.5rem 2rem !important;
@@ -24,6 +24,28 @@ span img{ width: 51px; height: 50px;}
 .nav-item a{
    color: #000;
 }
+ 
+.tab-content p{
+   color: #000;
+   word-spacing: 4px;
+   text-align: justify;
+   letter-spacing: 0.5px;
+}
+.left img{
+  width: 150px;
+  width: 250px;
+  padding: 10px 13px 0px 0px;
+}
+center{
+  background-color: cornflowerblue;
+  height: 71px;
+  padding: 18px;
+  color: black;
+  font-size: 35px;
+  font-family: initial;
+  word-spacing: 3px;
+}
+ 
  </style>
 
   <main id="main">
@@ -115,61 +137,80 @@ span img{ width: 51px; height: 50px;}
       </div>
     </section><!-- End About Section -->
     <section>  
+
       <div class="container">
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#home">
-                        <button type="button" class="btn btn-outline-black waves-effect "  >
-                          <span><img src="../public/img/pagoda_logo.jpg"></span>
-                        </button><br>Pagodas
-                    
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#menu1">
-                        <button type="button" class="btn btn-outline-black waves-effect filter" >
-                          <span><img src="../public/img/beache_logo.jpg"></span>
-                        </button><br>Beaches
-                  </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#menu2">
-                <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="all">
-                  <span><img src="../public/img/restaurant_logo.jpg"></span>
-                </button><br>Restaurants
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#menu2">
-                <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="1">
-                  <span><img src="../public/img/waterfall_logo.jpg"></span>
-                </button><br>Waterfalls
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#menu2">
-              <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="1">
-                <span><img src="../public/img/hotel_logo.png">  </span>
-              </button><br>Hotels
-            </li>
-          </ul>
+            @if(!empty($Menu))
+              @foreach($Menu as $menu)
+                @if($menu->name == "Pagodas")
+                  <li class="nav-item">
+                    <a href="{{url('/show_menu', $menu->id)}}" class="nav-link active"    >
+                              <button type="button" class="btn btn-outline-black waves-effect "  >
+                                <span><img src="../public/uploadedimages/menu/{{$menu->image}}"></span>
+                              </button><br>{{$menu->name}}</a>
+                  </li>
+                @else
+                  <li class="nav-item">
+                    <a href="{{url('/show_menu', $menu->id)}}" class="nav-link"   href="#{{$menu->name}}">
+                              <button type="button" class="btn btn-outline-black waves-effect "  >
+                                <span><img src="../public/uploadedimages/menu/{{$menu->image}}"></span>
+                              </button><br>{{$menu->name}}</a>
+                  </li>
+                @endif
 
+              @endforeach
+            @endif
+             
+          </ul>
+ 
       <!-- Tab panes -->
-          <div class="tab-content">
-            <div id="home" class="container tab-pane active"><br>
-              <h3>HOME</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-            <div id="menu1" class="container tab-pane fade"><br>
-              <h3>Menu 1</h3>
-              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>
-            <div id="menu2" class="container tab-pane fade"><br>
-              <h3>Menu 2</h3>
-              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-            </div>
-          </div>
+      @if(!empty($Showmenu))
+        <div class="tab-content" >
+
+          @foreach($Showmenu as $key => $sub)
+ 
+              @if($sub->menu_type == "Pagodas")
+                <div id="Pagodas" class="container tab-pane active" ><br>
+                  @if($sub->title == "Shin Koe Shin Pagodas" )
+                    
+                    <div class="sks-pagoda">
+                      @if($key == 0)
+                      <h2><center>Shin Koe Shin Pagodas In Dawei</center></h2><br> 
+                      @endif
+                      <h4><a href="">{{$sub->name}}</a></h4><hr>
+                      <div class="col-sm-12">
+                        <div class="left  ">
+                          <img style="float:left;" src="../public/uploadedimages/submenu/{{$sub->image}} " alt="img" > 
+                           <p>{{$sub->description}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  @else
+                    <div class="other-pagoda">
+                      <h4><a href="">{{$sub->name}}</a></h4>
+                      <p>{{$sub->description}}</p>
+                    </div>
+                  @endif
+                </div>
+
+              @endif
+
+              @if($sub->menu_type == "Hotels")
+                <div id="pagoda" class="container tab-pane fade "><br>
+                      
+                  <div class="">
+                    <h3>{{$sub->name}}</h3>
+                    <p>{{$sub->description}}</p>
+                  </div>
+                  
+                </div>
+
+              @endif
+          @endforeach
+        </div>
+
+      @endif
       </div>
     </section>
 

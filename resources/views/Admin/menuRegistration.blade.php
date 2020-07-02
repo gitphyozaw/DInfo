@@ -155,7 +155,7 @@ font-size: 18px !important;
                             @foreach ($Menu as $menu) 
                               <tr>
                                 <td></td>
-                                <td><img src="../public/uploadedimages/menu/{{$menu->image}}" alt="img" style="width: 80px; height: 40px;"></td>
+                                <td><img src="../public/uploadedimages/menu/{{$menu->image}}" alt="img" style="width:80px; height: 40px;"></td>
                                 <td>{{$menu->name}}</td>
                                 <td>
                                      

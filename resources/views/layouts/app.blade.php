@@ -27,7 +27,7 @@
 
    
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <!-- <link href="assets/css/style.css" rel="stylesheet"> -->
   <link href="css/app.css" rel="stylesheet">
 
  <!--  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

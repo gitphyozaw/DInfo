@@ -6,7 +6,33 @@ use Illuminate\Http\Request;
 use DB;
 class homeController extends Controller
 {
-    public function index(){}
+    public function index(){
+         $show_menu = DB::table('dtb_submenu')
+        ->join('dtb_submenu_image','dtb_submenu_image.submenu_id','=','dtb_submenu.id')
+        ->where('status','1')
+        ->where('menu_id',1)
+        ->where('type','logo')
+        ->paginate(15);
+        $all_menu = DB::table('dtb_menu')->where('status','1')->get();
+
+        
+        return view('SiteInfo.index')
+                    -> with('Menu',$all_menu)
+                    -> with('Showmenu',$show_menu);
+
+    }
+
+    public function showMenu($id){
+        $show_menu = DB::table('dtb_submenu')
+        ->join('dtb_submenu_image','dtb_submenu_image.submenu_id','=','dtb_submenu.id')
+        ->where('status','1')
+        ->where('menu_id',$id)
+        ->where('type','logo')
+        ->paginate(15);
+        return view('SiteInfo.index')->with('Showmenu',$show_menu);
+
+    }
+
      /**
      * Show the form for creating a new resource.
      *

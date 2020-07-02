@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('SiteInfo.index');
-});
+});*/
+	Route::get('/', 'homeController@index');
 
 
 /**admin route**/
@@ -61,6 +62,8 @@ Route::post('/submenu_registration', 'submenuController@submenuInsert');
 /***D info***/
 //Route::get('autocomplete', 'home/homeController@autocomplete')->name('autocomplete');
 Route::post('/autocomplete', 'homeController@autocomplete')->name('autocomplete');
+Route::get('/show_menu/{id}', 'homeController@showMenu');
+
 
 
 /**************end***********/
