@@ -21,30 +21,62 @@ span img{ width: 51px; height: 50px;}
 .nav-link {
     padding: 0.5rem 2rem !important;
 }
+.nav-link.active {
+    border-color: #1b91ef !important;
+}
+.nav-item{
+  width: 148px !important;
+}
 .nav-item a{
    color: #000;
 }
- 
+.nav-item :hover{
+  background-color: #1b91ef !important;
+}
+.sks-pagoda{
+  max-height: 600px;
+  overflow-y: auto;
+  margin-top: -35px;
+}
 .tab-content p{
    color: #000;
    word-spacing: 4px;
    text-align: justify;
    letter-spacing: 0.5px;
 }
-.left img{
+.tab-content img{
+  float:left;
   width: 150px;
   width: 250px;
   padding: 10px 13px 0px 0px;
+
 }
 center{
-  background-color: cornflowerblue;
-  height: 71px;
-  padding: 18px;
+  background-color: #1b91ef ;
+  height: 70px;
+  padding: 8px;
   color: black;
   font-size: 35px;
   font-family: initial;
   word-spacing: 3px;
 }
+.sks-pagoda::-webkit-scrollbar-track {
+  border: 1px solid #1b91ef;
+  padding: 2px 0;
+  background-color: #fff;
+}
+
+.sks-pagoda::-webkit-scrollbar {
+  width: 16px;
+}
+
+.sks-pagoda::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  border: 1px solid #000;
+  background-image: -webkit-linear-gradient(60deg,#1b91ef 0%,#1b91ef);
+}
+
  
  </style>
 
@@ -165,35 +197,41 @@ center{
           </ul>
  
       <!-- Tab panes -->
+      <div class="sks tab-content "  >
+          @if(!empty($Sks))
+              <h2><center>Shin Koe Shin Pagodas In Dawei</center></h2><br> 
+              <div class="sks-pagoda jumbotron card"> 
+              @foreach($Sks as $key => $sks)
+                 <div class=" container tab-pane active">
+                       
+                      <h3><a href="">{{$sks->name}}</a></h3><hr>
+                      <div class="col-sm-12">
+                        <div class="left  ">
+                          <img class="venobox"  class="img-fluid"   src="../public/uploadedimages/submenu/{{$sks->image}} " alt="img" > 
+                           <p>{{$sks->description}}</p>
+                        </div>
+                      </div><br>
+                    </div>
+              @endforeach
+            </div>
+          @endif
+
+      </div>
+
       @if(!empty($Showmenu))
         <div class="tab-content" >
 
           @foreach($Showmenu as $key => $sub)
- 
               @if($sub->menu_type == "Pagodas")
-                <div id="Pagodas" class="container tab-pane active" ><br>
-                  @if($sub->title == "Shin Koe Shin Pagodas" )
-                    
-                    <div class="sks-pagoda">
-                      @if($key == 0)
-                      <h2><center>Shin Koe Shin Pagodas In Dawei</center></h2><br> 
-                      @endif
-                      <h4><a href="">{{$sub->name}}</a></h4><hr>
-                      <div class="col-sm-12">
-                        <div class="left  ">
-                          <img style="float:left;" src="../public/uploadedimages/submenu/{{$sub->image}} " alt="img" > 
-                           <p>{{$sub->description}}</p>
-                        </div>
-                      </div>
-                    </div>
-                  @else
+                @if($sub->title != "Shin Koe Shin Pagodas" )
+                  <div id="Pagodas" class="container tab-pane active" ><br>
                     <div class="other-pagoda">
-                      <h4><a href="">{{$sub->name}}</a></h4>
-                      <p>{{$sub->description}}</p>
+                      <h3><a class="venobox" href="">{{$sub->name}}</a></h3>
+                       <img  class="img-fluid" src="../public/uploadedimages/submenu/{{$sks->image}} " alt="img" > 
+                       <p>{{$sub->description}}</p>
                     </div>
-                  @endif
-                </div>
-
+                  </div>
+                @endif
               @endif
 
               @if($sub->menu_type == "Hotels")
@@ -201,7 +239,8 @@ center{
                       
                   <div class="">
                     <h3>{{$sub->name}}</h3>
-                    <p>{{$sub->description}}</p>
+                     <img  class="img-fluid" src="../public/uploadedimages/submenu/{{$sks->image}} " alt="img" > 
+                     <p>{{$sub->description}}</p>
                   </div>
                   
                 </div>
@@ -211,6 +250,9 @@ center{
         </div>
 
       @endif
+      
+      {{ $Showmenu->links() }}
+
       </div>
     </section>
 

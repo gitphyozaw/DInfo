@@ -12,24 +12,46 @@ class homeController extends Controller
         ->where('status','1')
         ->where('menu_id',1)
         ->where('type','logo')
-        ->paginate(15);
+        ->paginate(10);
+        $sks = DB::table('dtb_submenu')
+        ->join('dtb_submenu_image','dtb_submenu_image.submenu_id','=','dtb_submenu.id')
+        ->where('status','1')
+        ->where('menu_id',1)
+        ->where('title',"Shin Koe Shin Pagodas")
+        ->where('type','logo')
+        ->get();
+
         $all_menu = DB::table('dtb_menu')->where('status','1')->get();
 
         
         return view('SiteInfo.index')
                     -> with('Menu',$all_menu)
+                    -> with('Sks',$sks)
                     -> with('Showmenu',$show_menu);
 
     }
 
     public function showMenu($id){
+
         $show_menu = DB::table('dtb_submenu')
         ->join('dtb_submenu_image','dtb_submenu_image.submenu_id','=','dtb_submenu.id')
         ->where('status','1')
         ->where('menu_id',$id)
         ->where('type','logo')
         ->paginate(15);
-        return view('SiteInfo.index')->with('Showmenu',$show_menu);
+
+         $sks = DB::table('dtb_submenu')
+        ->join('dtb_submenu_image','dtb_submenu_image.submenu_id','=','dtb_submenu.id')
+        ->where('status','1')
+        ->where('menu_id',$id)
+        ->where('title',"Shin Koe Shin Pagodas")
+        ->where('type','logo')
+        ->get();
+
+
+        return view('SiteInfo.index')
+        ->with('Sks',$sks)
+        ->with('Showmenu',$show_menu);
 
     }
 

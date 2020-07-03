@@ -143,7 +143,7 @@ h1, h2, h3, h4, h5, h6 {
   color: white;
   padding: 9px 14px;
   transition: 0.3s;
-  font-size: 15px;
+  font-size: 22px;
   font-weight: 500;
   font-family: "Poppins", sans-serif;
 }
@@ -151,6 +151,8 @@ h1, h2, h3, h4, h5, h6 {
 .nav-menu a:hover, .nav-menu .active > a, .nav-menu li:hover > a {
   color: #ffb03b;
   text-decoration: none;
+  background-color: #1b91ef;
+
 }
 
 .nav-menu .book-a-table a {
@@ -1120,8 +1122,10 @@ section {
     display: none !important;
     } 
  .goog-te-gadget .goog-te-combo {
-    margin-top: 1em !important;
-    border-color: #e08e10 ;
+    background-color: #ffe73f;
+    height: 51px;
+    width: 170px;
+    margin-top: 0px !important;
 }
 
 
