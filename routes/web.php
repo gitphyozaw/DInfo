@@ -24,16 +24,16 @@
 	Route::get('/admin_submenu', 'submenuController@index');
 
 /****/
-Route::get('/menu_pagoda', 'dInfoController@listPagoda');
+//Route::get('/menu_pagoda', 'dInfoController@listPagoda');
 // Route::get('/menu_pagoda', function () { return view('Menu.pagoda');});
 	Route::get('/menu_pagoda_detail', function () { return view('Menu.pagoda_detail');});
-Route::get('/menu_beach', function () { return view('Menu.beach');});
+//Route::get('/menu_beach', function () { return view('Menu.beach');});
 	Route::get('/menu_beach_detail', function () { return view('Menu.beach_detail');});
-Route::get('/menu_hotel', function () { return view('Menu.hotel');});
+//Route::get('/menu_hotel', function () { return view('Menu.hotel');});
 	Route::get('/menu_hotel_detail', function () { return view('Menu.hotel_detail');});
-Route::get('/menu_restaurant', function () { return view('Menu.restaurant');});
+//Route::get('/menu_restaurant', function () { return view('Menu.restaurant');});
 	Route::get('/menu_restaurant_detail', function () { return view('Menu.restaurant_detail');});
-Route::get('/menu_mountain', function () { return view('Menu.mountain');});
+//Route::get('/menu_mountain', function () { return view('Menu.mountain');});
 	Route::get('/menu_mountain_detail', function () { return view('Menu.mountain_detail');});
 
 Route::get('/gallery', function () { return view('Gallery.gallery');});

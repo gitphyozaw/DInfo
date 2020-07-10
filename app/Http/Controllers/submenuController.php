@@ -17,7 +17,7 @@ class submenuController extends Controller
      */
     public function index(){
 	    $all_menu = DB::table('dtb_menu')->where('status','1')->get();
-	    $all_submenu = DB::table('dtb_submenu')->where('status','1')->paginate(2);
+	    $all_submenu = DB::table('dtb_submenu')->where('status','1')->paginate(5);
 
         //$upd_data = Session::get('Upd_data');
         //$upd_data = isset($upd_data)? $upd_data : null;
@@ -234,6 +234,7 @@ class submenuController extends Controller
 
                 return $e->getMessage();
             }
+            
     } 
     
     /**

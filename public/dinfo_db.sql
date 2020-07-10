@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2020-07-03 10:59:46
+-- 生成日時: 2020-07-10 08:34:19
 -- サーバのバージョン： 10.4.11-MariaDB
 -- PHP のバージョン: 7.3.18
 
@@ -82,7 +82,8 @@ INSERT INTO `dtb_submenu` (`id`, `menu_id`, `title`, `name`, `address`, `descrip
 (8, 1, 'Shin Koe Shin Pagodas', 'Shin Datwe Pagoda', 'Maungmeishaung Village,\r Dawei-Yangon motor road,\r Dawei City,Tanintharyi Region, Myanmar (Burma)', 'Shin Datwe Pagoda built by Shin Zan is located in Maungmeishaung Village, seven miles from Dawei-Yebyu motor road. As local people said as Shin Zan threw his relic into the air with a vow to build a pagoda, the relic was flying above the place of the current pagoda. So, it was well known as Shin Datwe Pagoda. A 15 feet high sitting Buddha image made of marble rock can be seen near Shin Datwe Pagoda.', 'Pagodas', 'all', 1, '2020-06-18 16:54:42', '2020-06-18 16:56:13'),
 (9, 1, 'Shin Koe Shin Pagodas', 'Shin Hsandaw Pagoda', 'Kaleinaung Village,\r  Yebyu Township, \r Dawei City,Tanintharyi Region, Myanmar (Burma)', 'Shin Hsandaw Pagoda, famous as Hsandawshin Hsutaungpyae Pagoda on Kalein Hill, was built on Kaleinaung Hill in Yebyu Township. The hill is 47 miles north of Dawei.\r\n\r\nThree pieces of relic hair of Kakusanda, Konagamana and Gotama Buddhas who had enlightened in Badda World were enshrined in the rocky reliquary which is 30 by 30 elbows each in length and width and 40 elbows in depth. A 15 elbows high Shin Hsandaw Pagoda was built on the reliquary. The Buddha Pujaniya festival of the pagoda takes place on the full moon day of Tabaung yearly.\r\n\r\nNine pagodas under titles of Shin, which are famous across Myanmar, do not have firmly historical evidence but they are crowded with Buddhist travelers.', 'Pagodas', 'all', 1, '2020-06-18 16:58:58', '2020-06-18 16:58:58'),
 (10, 1, NULL, 'Shwe Taung Zar Pagoda', 'Peinnetaw Ward,\r\n Dawei City,\r\nTanintharyi Region, \r\nMyanmar (Burma)', 'The lush and quiet city lives from fishing, trading, rubber & coconut plantation and mining. During rainy season (May to October) it becomes one of the wettest places on the planet.\r\n\r\nThere are quite a few pagodas and temples around Dawei with are worth a visit, for example Shin Moe Thi Pagoda, which is dating back to 1438.\r\n\r\nShwe Taung Zar Pagoda is the main pagoda in Dawei. On the same compound is the public museum (open 4.30 pm – 6.30 pm) which houses numerous ancient Buddha images, vases and coins. About 15 kilometers west is the famous Maung Ma Gan Beach.', 'Pagodas', NULL, 1, '2020-06-30 16:23:17', '2020-06-30 16:23:17'),
-(11, 1, NULL, 'test', NULL, 'In Laravel 5 custom pagination is based on presenters (classes) instead of views.\r\n\r\nAssuming in your routed code you have\r\n\r\n$users = Users::paginate(15);\r\nIn L4 you used to do something like this in your views:\r\n\r\n$users->appends([\'sort\' => \'votes\'])->links();\r\nIn L5 you do instead:\r\n\r\n$users->appends([\'sort\' => \'votes\'])->render();\r\nThe render() method accepts an Illuminate\\Contracts\\Pagination\\Presenter instance. You can create a custom class that implements that contract and pass it to the render() method. Note that Presenter is an interface, not a class, therefore you must implement it, not extend it. That\'s why you are getting the error.\r\n\r\nAlternatively you can extend the Laravel paginator (in order to use its pagination logic) and then pass the existing pagination instance ($users->...) to you extended class constructor. This is indeed what I did for creating my custom Zurb Foundation presenter based on the Bootstrap presenter provided by Laravel. It uses all the Laravel pagination logic and only overrides the rendering methods.', 'Pagodas', 'other', 1, '2020-07-02 23:51:22', '2020-07-02 23:54:14');
+(11, 1, NULL, 'test', NULL, 'In Laravel 5 custom pagination is based on presenters (classes) instead of views.\r\n\r\nAssuming in your routed code you have\r\n\r\n$users = Users::paginate(15);\r\nIn L4 you used to do something like this in your views:\r\n\r\n$users->appends([\'sort\' => \'votes\'])->links();\r\nIn L5 you do instead:\r\n\r\n$users->appends([\'sort\' => \'votes\'])->render();\r\nThe render() method accepts an Illuminate\\Contracts\\Pagination\\Presenter instance. You can create a custom class that implements that contract and pass it to the render() method. Note that Presenter is an interface, not a class, therefore you must implement it, not extend it. That\'s why you are getting the error.\r\n\r\nAlternatively you can extend the Laravel paginator (in order to use its pagination logic) and then pass the existing pagination instance ($users->...) to you extended class constructor. This is indeed what I did for creating my custom Zurb Foundation presenter based on the Bootstrap presenter provided by Laravel. It uses all the Laravel pagination logic and only overrides the rendering methods.', 'Pagodas', 'other', 1, '2020-07-02 23:51:22', '2020-07-02 23:54:14'),
+(12, 1, NULL, '00000', NULL, 'Yangon ( Burmese: ရန်ကုန်; pronunciation [jàɰ̃ɡòʊɰ̃ mjo̰]; lit. \'End of Strife\'), also known as Rangoon, is the capital of the Yangon Region and the largest city of Myanmar (also known as Burma). Yangon served as the capital of Myanmar until 2006, when the military government relocated the administrative functions to the purpose-built capital city of Naypyidaw [nèpjìdɔ̀] in north central Myanmar.[3] With over 5 million people, Yangon is Myanmar\'s most populous city and its most important commercial centre.\r\n\r\nYangon boasts the largest number of colonial-era buildings in Southeast Asia,[4] and has a unique colonial-era urban core that is remarkably intact.[5] The colonial-era commercial core is centered around the Sule Pagoda, which is reputed to be over 2,000 years old.[6]', 'Pagodas', 'other', 1, '2020-07-05 21:18:25', '2020-07-05 22:06:22');
 
 -- --------------------------------------------------------
 
@@ -126,7 +127,8 @@ INSERT INTO `dtb_submenu_image` (`id`, `submenu_id`, `image`, `type`) VALUES
 (22, 9, 'Shin-Hsandaw-Pagoda(logo).jpg', 'logo'),
 (23, 9, 'Shin-Hsandaw-Pagoda1.jpg', 'jpg'),
 (24, 10, 'Shwe-Taung-Zar(logo).jpg', 'logo'),
-(25, 11, '4a0bc6db3f76a7463cd9c81a7e339302.jpg', 'logo');
+(25, 11, '4a0bc6db3f76a7463cd9c81a7e339302.jpg', 'logo'),
+(26, 12, 'depositphotos_185667584-stock-photo-multicultural-group-young-students-studying.jpg', 'logo');
 
 --
 -- ダンプしたテーブルのインデックス
@@ -164,13 +166,13 @@ ALTER TABLE `dtb_menu`
 -- テーブルのAUTO_INCREMENT `dtb_submenu`
 --
 ALTER TABLE `dtb_submenu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- テーブルのAUTO_INCREMENT `dtb_submenu_image`
 --
 ALTER TABLE `dtb_submenu_image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -24,7 +24,7 @@ class homeController extends Controller
         $all_menu = DB::table('dtb_menu')->where('status','1')->get();
 
         
-        return view('SiteInfo.index')
+        return view('SiteInfo/index')
                     -> with('Menu',$all_menu)
                     -> with('Sks',$sks)
                     -> with('Showmenu',$show_menu);
@@ -48,9 +48,12 @@ class homeController extends Controller
         ->where('type','logo')
         ->get();
 
+        $all_menu = DB::table('dtb_menu')->where('status','1')->get();
+        
 
-        return view('SiteInfo.index')
+        return view('SiteInfo/index')
         ->with('Sks',$sks)
+        -> with('Menu',$all_menu)
         ->with('Showmenu',$show_menu);
 
     }

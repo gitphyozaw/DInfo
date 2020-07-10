@@ -177,7 +177,7 @@ center{
       <div class="container">
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
-            @if(count($Menu)>0)
+            @if(!empty($Menu))
               @foreach($Menu as $menu)
                 @if($menu->name == "Pagodas")
                   <li class="nav-item">
@@ -202,7 +202,7 @@ center{
  
       <!-- Tab panes -->
       <div class="sks tab-content "  >
-          @if(count($Sks)>0)
+          @if(!empty($Sks))
               <h2><center>Shin Koe Shin Pagodas In Dawei</center></h2><br> 
               <div class="sks-pagoda jumbotron card"> 
               @foreach($Sks as $key => $sks)
@@ -222,7 +222,7 @@ center{
 
       </div>
 
-      @if(count($Showmenu)>0)
+      @if(!empty($Showmenu))
         <div class="tab-content" >
 
           @foreach($Showmenu as $key => $sub)
@@ -256,7 +256,6 @@ center{
         <center class="pag-end">
           <div class="col-sm-offset-5" >{{ $Showmenu->links() }}</div>
         </center>
-
 
       @endif
 
