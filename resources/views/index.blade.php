@@ -24,9 +24,9 @@ span img{ width: 51px; height: 50px;}
 .nav-link.active {
     border-color: #1b91ef !important;
 }
-.nav-item{
+/*.nav-item{
   width: 148px !important;
-}
+}*/
 .nav-item a{
    color: #000;
 }

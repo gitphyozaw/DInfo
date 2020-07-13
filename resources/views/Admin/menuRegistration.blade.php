@@ -86,30 +86,27 @@ font-size: 18px !important;
                 <div class="row">
                     <div class="col-sm-2 text">  
                         <label>Upload Image:</label>
-                    </div>    
-                    <div class="col-sm-8">  
-                        <div class="input-group">
-                            <input id="fakeUploadLogo" readonly="readonly" 
-                            class="form-control  " placeholder="Choose File"  name="image" value="{{old('image')}}<?php 
-                       if(!empty($Upd_data)) echo $Upd_data->image; ?>">
-                            <div class="input-group-btn">
-                              <div class="fileUpload btn btn-danger fake-shadow">
-                                <span><i class="glyphicon glyphicon-upload"></i> Upload</span>
-                                <input id="logo-id" name="image" type="file" class="attachment_upload">
-                              </div>
-                            </div>
-                             
-                      </div><br>    
-                      <div class="main-img-preview">
-                       
-                    @if(!empty($Upd_data))
-                        <img  src="../uploadedimages/menu/{{$Upd_data->image}}"  
-                        class="thumbnail img-preview" id="logo-id" title="Preview Logo" alt="logo image">
-                    @else
-                         <img class="thumbnail img-preview" id="logo-id" title="Preview Logo" alt="preview image">
-                    @endif
-                      </div>
-                    </div>
+                    </div>  
+                    <div class="col-sm-8">
+                        <fieldset class="form-group">
+                            <input type="hidden" name="img_hd[]" id="img_hd">
+                            <input type="file" id="pro-image" name="pro-image[]"   class="form-control" multiple onclick="$('#pro-image').click()" value="">
+                        </fieldset>
+                        <div class="preview-images-zone ui-sortable ">
+                             @if(!empty($Edit_img))
+                                @foreach($Edit_img as $val)
+                                      
+                                            <div class="test" id="test">
+                                           <img src="../uploadedimages/menu/{{$val->image}}" alt="img"  width="120px" height="90px" class="edit_img" >
+                                            <a class="remImage" href="{{url('/deleteMenuImage', $val->id)}}"  id="delete">
+                                                <img src="..\assets\img\del_icon.svg" style="width:40px;height:40px;">
+                                            </a>   
+                                        </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>  
+                     
                  
                 </div>
                 <div class="col-sm-offset-5">
@@ -159,10 +156,10 @@ font-size: 18px !important;
                                 <td>{{$menu->name}}</td>
                                 <td>
                                      
-                                    <a href="{{url('/menu_edit', $menu->id)}}"   ><span class="glyphicon glyphicon-pencil" style="font-size: 18px;"></span> </a>
+                                    <a href="{{url('/menu_edit', $menu->menu_id)}}"   ><span class="glyphicon glyphicon-pencil" style="font-size: 18px;"></span> </a>
                                 </td>
                                 <td>
-                                     <a href="{{url('/menu_delete', $menu->id)}}" class="delete-confirm"><span class="glyphicon glyphicon-trash" style="font-size: 18px; color:red;" ></span></a>
+                                     <a href="{{url('/menu_delete', $menu->menu_id)}}" class="delete-confirm"><span class="glyphicon glyphicon-trash" style="font-size: 18px; color:red;" ></span></a>
                                 </td>
           
                             </tr>
@@ -198,7 +195,7 @@ font-size: 18px !important;
 <script type="text/javascript">
 
 $(document).ready(function() {
-    var brand = document.getElementById('logo-id');
+    /*var brand = document.getElementById('logo-id');
     brand.className = 'attachment_upload';
     brand.onchange = function() {
         document.getElementById('fakeUploadLogo').value = this.value.substring(12);
@@ -217,6 +214,14 @@ $(document).ready(function() {
     }
     $("#logo-id").change(function() {
         readURL(this);
+    });*/
+    document.getElementById('pro-image').addEventListener('change', readImage, false);
+    
+    $( ".preview-images-zone" ).sortable();
+    
+    $(document).on('click', '.image-cancel', function() {
+        let no = $(this).data('no');
+        $(".preview-image.preview-show-"+no).remove();
     });
 });
 
@@ -238,6 +243,70 @@ $('.delete-confirm').on('click', function (event) {
     });
 });
 
+/***Image Upload***/
+var num = 2;
+var imgArr      = [];
+var fileName    ="";
+         
+function readImage() {   
+    if (window.File && window.FileList && window.FileReader) {
+        var files = event.target.files; //FileList object
+        var output = $(".preview-images-zone");
+
+        var processed_file_names = [];
+        var form = document.querySelector('form');
+        var data = new FormData(form);// Create an FormData object 
+        $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+            });
+            $.ajax({
+                type: "POST",
+                async: false,
+                enctype: 'multipart/form-data',
+                url:"{{ URL::to('storeMenuImage') }}",
+
+                data:data, processData: false, contentType: false, cache: false, dataType: 'json',
+                success: function (data) {                  
+                    $.each(data, function ($k, $v) {
+                        processed_file_names[$k] = $v;
+                    });                 
+                },
+                error: function (r) { console.log(r); }
+            });
+
+            for (let i = 0; i < files.length; i++) {
+                var file = files[i];
+                if (!file.type.match('image')) continue;
+     
+                data.append('pro-image[]', file, file.name);
+                var picReader = new FileReader();
+                
+                picReader.addEventListener('load', function (event) {
+                    var picFile = event.target;
+                    var html =  '<div class="preview-image preview-show-' + num + '">' +
+                                /*'<div class="image-cancel" id="img_del"  data-no="' + num + '">x</div>' +*/
+                                '<div class="image-zone"><img  id="pro-img-' + num + '" src="' + picFile.result + '"></div>' ;
+
+
+                    output.append(html);
+                    num = num + 1;
+                });
+
+                picReader.readAsDataURL(file);
+            }
+            
+            for(var i=0;i<files.length;i++)
+            {
+                var fileName = processed_file_names[i];
+                imgArr.push(fileName) ;
+                document.getElementById('img_hd').value = imgArr; 
+            }
+
+        $("#pro-image").val('');
+    } else {
+        console.log('Browser not support');
+    }
+}
 
 
 

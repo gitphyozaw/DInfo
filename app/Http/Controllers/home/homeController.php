@@ -21,18 +21,27 @@ class homeController extends Controller
         ->where('type','logo')
         ->get();
 
-        $all_menu = DB::table('dtb_menu')->where('status','1')->get();
+        $all_menu = DB::table('dtb_menu')
+        ->join('dtb_menu_image','dtb_menu_image.menu_id','=','dtb_menu.id')
+        ->where('status','1')
+        ->get();
 
-        
+        $view = DB::table('dtb_menu')->where('status','1')->select('views')->get();
+        $arr = array(
+            'Menu' => $all_menu,
+            'Sks' => $sks,
+            'Showmenu' => $show_menu,
+            'View' => $view
+             );
         return view('SiteInfo/index')
-                    -> with('Menu',$all_menu)
+                   /* -> with('Menu',$all_menu)
                     -> with('Sks',$sks)
-                    -> with('Showmenu',$show_menu);
+                    -> with('Showmenu',$show_menu);*/
+                    -> with('Arr',$arr);
 
     }
 
     public function showMenu($id){
-
         $show_menu = DB::table('dtb_submenu')
         ->join('dtb_submenu_image','dtb_submenu_image.submenu_id','=','dtb_submenu.id')
         ->where('status','1')
@@ -48,13 +57,27 @@ class homeController extends Controller
         ->where('type','logo')
         ->get();
 
-        $all_menu = DB::table('dtb_menu')->where('status','1')->get();
+
+        DB::table('dtb_menu')->where('id',$id)->increment('views');
         
 
-        return view('SiteInfo/index')
-        ->with('Sks',$sks)
+        $all_menu = DB::table('dtb_menu')
+        ->join('dtb_menu_image','dtb_menu_image.menu_id','=','dtb_menu.id')
+        ->where('status','1')
+        ->get();
+        $view = DB::table('dtb_menu')->where('status','1')->select('views')->get();
+        
+        $arr = array(
+            'Menu' => $all_menu,
+            'Sks' => $sks,
+            'Showmenu' => $show_menu,
+            'View' => $view
+             );
+
+        return view('SiteInfo/index')->with("Arr",$arr);
+        /*->with('Sks',$sks)
         -> with('Menu',$all_menu)
-        ->with('Showmenu',$show_menu);
+        ->with('Showmenu',$show_menu);*/
 
     }
 

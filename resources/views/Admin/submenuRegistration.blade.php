@@ -142,7 +142,7 @@ a.remImage img {
                                       
                                             <div class="test" id="test">
                                            <img src="../uploadedimages/submenu/{{$val->image}}" alt="img"  width="120px" height="90px" class="edit_img" >
-                                            <a class="remImage" href="{{url('/deleteImage', $val->id)}}"  id="delete">
+                                            <a class="remImage" href="{{url('/deleteSubImage', $val->id)}}"  id="delete">
                                                 <img src="..\assets\img\del_icon.svg" style="width:40px;height:40px;">
                                             </a>   
                                         </div>
@@ -339,7 +339,7 @@ function readImage() {
                 type: "POST",
                 async: false,
                 enctype: 'multipart/form-data',
-                url:"{{ URL::to('storeImage') }}",
+                url:"{{ URL::to('storeSubImage') }}",
 
                 data:data, processData: false, contentType: false, cache: false, dataType: 'json',
                 success: function (data) {                  

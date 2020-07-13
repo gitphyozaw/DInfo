@@ -24,9 +24,9 @@ span img{ width: 51px; height: 50px;}
 .nav-link.active {
     border-color: #1b91ef !important;
 }
-.nav-item{
+/*.nav-item{
   width: 148px !important;
-}
+}*/
 .nav-item a{
    color: #000;
 }
@@ -173,25 +173,29 @@ center{
       </div>
     </section><!-- End About Section -->
     <section>  
-
+ 
       <div class="container">
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
-            @if(count($Menu)>0)
-              @foreach($Menu as $menu)
+            @if(count($Arr['Menu'])>0)
+              @foreach($Arr['Menu'] as $menu)
                 @if($menu->name == "Pagodas")
                   <li class="nav-item">
-                    <a href="{{url('/show_menu', $menu->id)}}" class="nav-link active"    >
+                    @if($menu->type == "logo")
+                      <a href="{{url('/show_menu', $menu->menu_id)}}" class="nav-link active"    >
                               <button type="button" class="btn btn-outline-black waves-effect "  >
                                 <span><img src="../public/uploadedimages/menu/{{$menu->image}}"></span>
                               </button><br>{{$menu->name}}</a>
+                    @endif  
                   </li>
                 @else
                   <li class="nav-item">
-                    <a href="{{url('/show_menu', $menu->id)}}" class="nav-link"   href="#{{$menu->name}}">
+                    @if($menu->type == "logo")
+                    <a href="{{url('/show_menu', $menu->menu_id)}}" class="nav-link"   href="#{{$menu->name}}">
                               <button type="button" class="btn btn-outline-black waves-effect "  >
                                 <span><img src="../public/uploadedimages/menu/{{$menu->image}}"></span>
                               </button><br>{{$menu->name}}</a>
+                    @endif
                   </li>
                 @endif
 
@@ -202,10 +206,10 @@ center{
  
       <!-- Tab panes -->
       <div class="sks tab-content "  >
-          @if(count($Sks)>0)
+          @if(count($Arr['Sks'])>0)
               <h2><center>Shin Koe Shin Pagodas In Dawei</center></h2><br> 
               <div class="sks-pagoda jumbotron card"> 
-              @foreach($Sks as $key => $sks)
+              @foreach($Arr['Sks'] as $key => $sks)
                  <div class=" container tab-pane active">
                        
                       <h3><a href="">{{$sks->name}}</a></h3><hr>
@@ -222,10 +226,10 @@ center{
 
       </div>
 
-      @if(count($Showmenu)>0)
+      @if(count($Arr['Showmenu'])>0)
         <div class="tab-content" >
 
-          @foreach($Showmenu as $key => $sub)
+          @foreach($Arr['Showmenu'] as $key => $sub)
               @if($sub->menu_type == "Pagodas")
                 @if($sub->title != "Shin Koe Shin Pagodas" )
                   <div id="Pagodas" class="container tab-pane active" ><br>
@@ -254,7 +258,7 @@ center{
         </div>
         <br>
         <center class="pag-end">
-          <div class="col-sm-offset-5" >{{ $Showmenu->links() }}</div>
+          <div class="col-sm-offset-5" >{{ $Arr['Showmenu']->links() }}</div>
         </center>
 
 

@@ -329,14 +329,43 @@ address{
       <nav class="nav-menu d-none d-lg-block">
 
         <ul >
+          
          <!--  <li class="active">
             <a href="ondex.html">Home</a></li> -->
           <li><a href="{{url('/')}}">Home</a></li>
           <li class="menu"><a href="#menu">Menu</a>
             <div class="sub-menu">
               <div class="row menu-header">
+                @if(count($Arr['Menu'])>0)
+                  @foreach($Arr['Menu'] as $menu)
+                    @if($menu->type != "logo")
+                      <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                        <div class="img_card" >
+                          <a href="{{url('/show_menu', $menu->menu_id)}}">
+                            <img  src="../public/uploadedimages/menu/{{$menu->image}}" class="zoom">
+                          </a>
+                          <div class="card-block">
+                            <h4 class="card-title"> {{$menu->name}} In Dawei</h4>
+                              <a href="#">
+                                <div class="rating">
+                                  <span>☆☆☆☆☆</span>
+                                </div>
+                              </a>
+                            <div class="card-text">
+                              Tawshif is a web designer 
+                            </div>
+                          </div>
+                          <div class="card-footer">
+                            <span><i class="fas fa-eye"></i>{{$menu->views}} Views</span>
+                          </div>
+                        </div>
+                      </div>
+                    @endif
 
-                  <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                  @endforeach
+                @endif
+
+                <!-- <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
                       <div class="img_card" >
                         <a href="{{url('/show_menu', 1)}}">
                           <img  src="https://live.staticflickr.com/4402/36696146701_b06cf42d92_b.jpg" class="zoom">
@@ -356,8 +385,9 @@ address{
                           <span><i class="fas fa-eye"></i>2 Views</span>
                         </div>
                       </div>
-                  </div>
-                  <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
                     <div class="img_card" >
                       <a href="{{url('/show_menu', 2)}}">
                         <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRKQz-lu4yIeF2PSIkE8z4LqcZyAmO8UySRiKfPiVLf8WItlWrN&usqp=CAU" class="zoom"  style="width: 290px;  height: 194px;">
@@ -378,10 +408,10 @@ address{
                           <span><i class="fas fa-eye"></i>2 Views</span>
                       </div>
                     </div>
-                  </div>
+                </div>
 
-                  <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
-                  <div class="img_card" >
+                <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                    <div class="img_card" >
                     <a href="{{url('/show_menu', 3)}}">
                        <img  src="../img/mountain.jpg" class="zoom"  style="width: 290px;  height: 194px;">
                     </a>
@@ -399,7 +429,7 @@ address{
                     <div class="card-footer">
                       <span><i class="fas fa-eye"></i>2 Views</span>
                     </div>
-                  </div>
+                    </div>
                 </div>
 
                 <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
@@ -467,7 +497,7 @@ address{
                     </div>
                   </div>
                 </div>
-
+ -->
                 
 
               </div>

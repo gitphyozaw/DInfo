@@ -13,10 +13,11 @@
 </head>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-  <link href="css/admin.css" rel="stylesheet">
-  <script src="js/admin.js"></script>
+  <link href=" css/admin.css" rel="stylesheet">
+  <script src=" js/admin.js"></script>
  
 
 
@@ -82,7 +83,7 @@
                     <a href="sugerencias"><i class="fa fa-user"></i> User</a>
                 </li>
                 <li>
-                    <a href="sugerencias"><i class="fa fa-trash"></i> Trash</a>
+                    <a href="{{url('/trash')}}"><i class="fa fa-trash"></i> Trash</a>
                 </li>
                 <li>
                     <a href="faq"><i class="fa fa-fw fa-power-off"></i> Logout</a>
