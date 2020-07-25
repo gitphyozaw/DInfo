@@ -301,7 +301,10 @@ address{
   width: 290px;
   height: 194px;
 }
-
+.logo-img{
+  width: 120px;
+  height: 114px;
+}
   </style>
 
 
@@ -321,7 +324,7 @@ address{
     <div class="container d-flex align-items-center">
     {{ csrf_field() }}
       <div class="logo mr-auto">
-        <h1 class="text-light"><a href="{{url('/')}}"><span>D Info</span></a></h1>
+        <h1 class="text-light"><a href="{{url('/')}}"><span><img src="assets/img/Dlogo.png" alt=""   class="logo-img">D Info</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>

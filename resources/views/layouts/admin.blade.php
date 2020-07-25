@@ -83,7 +83,7 @@
                     <a href="sugerencias"><i class="fa fa-user"></i> User</a>
                 </li>
                 <li>
-                    <a href="{{url('/trash')}}"><i class="fa fa-trash"></i> Trash</a>
+                    <a href="{{url('/Trash')}}"><i class="fa fa-trash"></i> Trash</a>
                 </li>
                 <li>
                     <a href="faq"><i class="fa fa-fw fa-power-off"></i> Logout</a>

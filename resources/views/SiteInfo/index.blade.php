@@ -80,13 +80,123 @@ center{
   border: 1px solid #000;
   background-image: -webkit-linear-gradient(60deg,#1b91ef 0%,#1b91ef);
 }
+/*image slider*/
+ @import url(http://fonts.googleapis.com/css?family=Anaheim);
 
- 
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    box-sizing: border-box
+}
+  
+
+#carousel {
+    width: 100%;
+    height: 10%;
+    position: absolute;
+    transform-style: preserve-3d;
+    animation: rotation 90s infinite linear
+}
+
+#carousel:hover {
+    animation-play-state: paused;
+}
+
+#carousel figure {
+    display: block;
+    position: absolute;
+    width: 90%;
+    height: 20%;
+    left: 10px;
+    top:  0px;
+    /*background:#fff;*/
+    background:rgba(255, 255, 255, -2);
+
+    filter:blur(-1px);
+    -o-filter:blur(-1px);
+    -ms-filter:blur(-1px);
+    -moz-filter:blur(-1px);
+    -webkit-filter:blur(-1px);
+    overflow: hidden;
+    border: none;
+}
+
+#carousel figure:nth-child(1) {
+    transform: rotateY(0deg) translateZ(188px)
+}
+
+#carousel figure:nth-child(2) {
+    transform: rotateY(40deg) translateZ(188px)
+}
+
+#carousel figure:nth-child(3) {
+    transform: rotateY(80deg) translateZ(188px)
+}
+
+#carousel figure:nth-child(4) {
+    transform: rotateY(120deg) translateZ(188px)
+}
+
+#carousel figure:nth-child(5) {
+    transform: rotateY(160deg) translateZ(188px)
+}
+
+#carousel figure:nth-child(6) {
+    transform: rotateY(200deg) translateZ(188px)
+}
+
+#carousel figure:nth-child(7) {
+    transform: rotateY(240deg) translateZ(188px)
+}
+
+#carousel figure:nth-child(8) {
+    transform: rotateY(280deg) translateZ(188px)
+}
+
+#carousel figure:nth-child(9) {
+    transform: rotateY(320deg) translateZ(188px)
+}
+
+#carousel img:hover {
+    -webkit-filter: grayscale(0);
+    transform: scale(1.2, 1.2)
+}
+
+@keyframes rotation {
+    from {
+        transform: rotateY(0deg)
+    }
+
+    to {
+        transform: rotateY(360deg)
+    }
+}
+.slider{
+  padding: 3px 0;
+  height: 150px;
+}
  </style>
 
   <main id="main">
-    
+    <section id="slider" class="slider">
+      <div id="carousel">
+        <figure><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562470009/BBBootstrap/Gallary/img-1.jpg"></figure>
+        <figure><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562470009/BBBootstrap/Gallary/img-5.jpg"></figure>
+        <figure><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562470010/BBBootstrap/Gallary/img-4.jpg"></figure>
+        <figure><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562470010/BBBootstrap/Gallary/img-3.jpg"></figure>
+        <figure><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562470010/BBBootstrap/Gallary/img-2.jpg"></figure>
+        <figure><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562470010/BBBootstrap/Gallary/img-6.jpg"></figure>
+        <figure><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562470010/BBBootstrap/Gallary/img-8.jpg"></figure>
+        <figure><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562470010/BBBootstrap/Gallary/img-7.jpg"></figure>
+        <figure><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1562470011/BBBootstrap/Gallary/img-9.jpg"></figure>
+    </div>
+    </section>
     <!-- ======= Whu Us Section ======= -->
+    <form   method="POST"  >
+    {{ csrf_field() }}
+
     <section id="why-us" class="why-us">
       <div class="container">
 
@@ -97,9 +207,10 @@ center{
               <img src="https://live.staticflickr.com/4402/36696146701_b06cf42d92_b.jpg" class="zoom img-fluid " style="width: 288px;  height: 194px;">
 
               <div class="card-body">
-                <span>00 Days</span>
+                <span>0 Days</span>
                 <p class="card-text">Some quick example text to build on the card title  </p>
-                <a href="#" class="btn btn-primary">Package</a>
+                <a href="{{url('/pack')}}" class="btn btn-primary">Package</a>
+                 
               </div>
             </div>
             
@@ -135,7 +246,7 @@ center{
 
       </div>
     </section><!-- End Whu Us Section -->
-
+  </form>
 
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
