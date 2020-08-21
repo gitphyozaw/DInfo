@@ -209,7 +209,7 @@ center{
               <div class="card-body">
                 <span>0 Days</span>
                 <p class="card-text">Some quick example text to build on the card title  </p>
-                <a href="{{url('/pack')}}" class="btn btn-primary">Package</a>
+                <a href="{{url('/package')}}" class="btn btn-primary">Package</a>
                  
               </div>
             </div>

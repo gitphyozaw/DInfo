@@ -25,7 +25,6 @@ class homeController extends Controller
             ->join('dtb_menu_image','dtb_menu_image.menu_id','=','dtb_menu.id')
             ->where('status','1')
             ->get();
-dd($all_menu);die;
         $view = DB::table('dtb_menu')->where('status','1')->select('views')->get();
         $arr  = array(
             'Menu' => $all_menu,

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2020-07-10 08:34:19
+-- 生成日時: 2020-08-21 04:42:56
 -- サーバのバージョン： 10.4.11-MariaDB
 -- PHP のバージョン: 7.3.18
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `dtb_menu` (
   `id` int(11) NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `image` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `views` int(11) NOT NULL DEFAULT 0,
   `status` int(11) NOT NULL DEFAULT 1,
   `created_date` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -39,13 +39,51 @@ CREATE TABLE `dtb_menu` (
 -- テーブルのデータのダンプ `dtb_menu`
 --
 
-INSERT INTO `dtb_menu` (`id`, `name`, `image`, `status`, `created_date`) VALUES
-(1, 'Pagodas', 'pagoda_logo.jpg', 1, '2020-05-24 22:44:36'),
-(2, 'Hotels', 'hotel_logo.png', 1, '2020-05-24 23:58:09'),
-(3, 'Mountains', 'mountain_logo.jpg', 1, '2020-05-24 22:45:00'),
-(4, 'Beaches', 'beache_logo.jpg', 1, '2020-05-24 22:45:17'),
-(5, 'Restaurants', 'restaurant_logo.jpg', 1, '2020-05-24 22:45:29'),
-(8, 'Waterfalls', 'waterfall_logo.jpg', 1, '2020-06-30 17:06:29');
+INSERT INTO `dtb_menu` (`id`, `name`, `views`, `status`, `created_date`) VALUES
+(1, 'Pagodas', 5, 1, '2020-07-12 18:00:20'),
+(2, 'Beaches', 20, 1, '2020-07-12 18:00:54'),
+(3, 'Hotels', 2, 1, '2020-07-12 19:36:00'),
+(4, 'Restaurants', 4, 1, '2020-07-12 19:37:36'),
+(5, 'Mountains', 0, 1, '2020-07-12 19:38:16'),
+(6, 'Waterfalls', 3, 1, '2020-07-12 19:39:46'),
+(7, 'tEST', 1, 1, '2020-07-12 21:18:06'),
+(8, 'cewr1', 0, 0, '2020-07-12 21:40:26');
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `dtb_menu_image`
+--
+
+CREATE TABLE `dtb_menu_image` (
+  `id` int(11) NOT NULL,
+  `menu_id` int(11) NOT NULL,
+  `image` varchar(200) NOT NULL,
+  `type` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- テーブルのデータのダンプ `dtb_menu_image`
+--
+
+INSERT INTO `dtb_menu_image` (`id`, `menu_id`, `image`, `type`) VALUES
+(1, 1, 'pagoda_logo.jpg', 'logo'),
+(2, 1, 'pagoda.jpg', 'jpg'),
+(3, 2, 'beache_logo.jpg', 'logo'),
+(4, 2, 'beache.jpg', 'jpg'),
+(5, 3, 'hotel_logo.png', 'logo'),
+(6, 3, 'download.jpg', 'jpg'),
+(7, 4, 'restaurant_logo.jpg', 'logo'),
+(8, 4, 'restaurant.jpg', 'jpg'),
+(9, 5, 'mountain_logo.jpg', 'logo'),
+(10, 5, 'mountain.jpg', 'jpg'),
+(11, 6, 'waterfall_logo.jpg', 'logo'),
+(12, 6, 'waterfall.jpg', 'jpg'),
+(14, 7, 'download.jpg', 'jpg'),
+(15, 7, 'hotel.jpg', 'jpg'),
+(16, 7, 'mountain.jpg', 'jpg'),
+(17, 8, 'download.jpg', 'logo'),
+(18, 8, 'hotel.jpg', 'jpg');
 
 -- --------------------------------------------------------
 
@@ -82,8 +120,8 @@ INSERT INTO `dtb_submenu` (`id`, `menu_id`, `title`, `name`, `address`, `descrip
 (8, 1, 'Shin Koe Shin Pagodas', 'Shin Datwe Pagoda', 'Maungmeishaung Village,\r Dawei-Yangon motor road,\r Dawei City,Tanintharyi Region, Myanmar (Burma)', 'Shin Datwe Pagoda built by Shin Zan is located in Maungmeishaung Village, seven miles from Dawei-Yebyu motor road. As local people said as Shin Zan threw his relic into the air with a vow to build a pagoda, the relic was flying above the place of the current pagoda. So, it was well known as Shin Datwe Pagoda. A 15 feet high sitting Buddha image made of marble rock can be seen near Shin Datwe Pagoda.', 'Pagodas', 'all', 1, '2020-06-18 16:54:42', '2020-06-18 16:56:13'),
 (9, 1, 'Shin Koe Shin Pagodas', 'Shin Hsandaw Pagoda', 'Kaleinaung Village,\r  Yebyu Township, \r Dawei City,Tanintharyi Region, Myanmar (Burma)', 'Shin Hsandaw Pagoda, famous as Hsandawshin Hsutaungpyae Pagoda on Kalein Hill, was built on Kaleinaung Hill in Yebyu Township. The hill is 47 miles north of Dawei.\r\n\r\nThree pieces of relic hair of Kakusanda, Konagamana and Gotama Buddhas who had enlightened in Badda World were enshrined in the rocky reliquary which is 30 by 30 elbows each in length and width and 40 elbows in depth. A 15 elbows high Shin Hsandaw Pagoda was built on the reliquary. The Buddha Pujaniya festival of the pagoda takes place on the full moon day of Tabaung yearly.\r\n\r\nNine pagodas under titles of Shin, which are famous across Myanmar, do not have firmly historical evidence but they are crowded with Buddhist travelers.', 'Pagodas', 'all', 1, '2020-06-18 16:58:58', '2020-06-18 16:58:58'),
 (10, 1, NULL, 'Shwe Taung Zar Pagoda', 'Peinnetaw Ward,\r\n Dawei City,\r\nTanintharyi Region, \r\nMyanmar (Burma)', 'The lush and quiet city lives from fishing, trading, rubber & coconut plantation and mining. During rainy season (May to October) it becomes one of the wettest places on the planet.\r\n\r\nThere are quite a few pagodas and temples around Dawei with are worth a visit, for example Shin Moe Thi Pagoda, which is dating back to 1438.\r\n\r\nShwe Taung Zar Pagoda is the main pagoda in Dawei. On the same compound is the public museum (open 4.30 pm – 6.30 pm) which houses numerous ancient Buddha images, vases and coins. About 15 kilometers west is the famous Maung Ma Gan Beach.', 'Pagodas', NULL, 1, '2020-06-30 16:23:17', '2020-06-30 16:23:17'),
-(11, 1, NULL, 'test', NULL, 'In Laravel 5 custom pagination is based on presenters (classes) instead of views.\r\n\r\nAssuming in your routed code you have\r\n\r\n$users = Users::paginate(15);\r\nIn L4 you used to do something like this in your views:\r\n\r\n$users->appends([\'sort\' => \'votes\'])->links();\r\nIn L5 you do instead:\r\n\r\n$users->appends([\'sort\' => \'votes\'])->render();\r\nThe render() method accepts an Illuminate\\Contracts\\Pagination\\Presenter instance. You can create a custom class that implements that contract and pass it to the render() method. Note that Presenter is an interface, not a class, therefore you must implement it, not extend it. That\'s why you are getting the error.\r\n\r\nAlternatively you can extend the Laravel paginator (in order to use its pagination logic) and then pass the existing pagination instance ($users->...) to you extended class constructor. This is indeed what I did for creating my custom Zurb Foundation presenter based on the Bootstrap presenter provided by Laravel. It uses all the Laravel pagination logic and only overrides the rendering methods.', 'Pagodas', 'other', 1, '2020-07-02 23:51:22', '2020-07-02 23:54:14'),
-(12, 1, NULL, '00000', NULL, 'Yangon ( Burmese: ရန်ကုန်; pronunciation [jàɰ̃ɡòʊɰ̃ mjo̰]; lit. \'End of Strife\'), also known as Rangoon, is the capital of the Yangon Region and the largest city of Myanmar (also known as Burma). Yangon served as the capital of Myanmar until 2006, when the military government relocated the administrative functions to the purpose-built capital city of Naypyidaw [nèpjìdɔ̀] in north central Myanmar.[3] With over 5 million people, Yangon is Myanmar\'s most populous city and its most important commercial centre.\r\n\r\nYangon boasts the largest number of colonial-era buildings in Southeast Asia,[4] and has a unique colonial-era urban core that is remarkably intact.[5] The colonial-era commercial core is centered around the Sule Pagoda, which is reputed to be over 2,000 years old.[6]', 'Pagodas', 'other', 1, '2020-07-05 21:18:25', '2020-07-05 22:06:22');
+(11, 1, NULL, 'test', NULL, 'In Laravel 5 custom pagination is based on presenters (classes) instead of views.\r\n\r\nAssuming in your routed code you have\r\n\r\n$users = Users::paginate(15);\r\nIn L4 you used to do something like this in your views:\r\n\r\n$users->appends([\'sort\' => \'votes\'])->links();\r\nIn L5 you do instead:\r\n\r\n$users->appends([\'sort\' => \'votes\'])->render();\r\nThe render() method accepts an Illuminate\\Contracts\\Pagination\\Presenter instance. You can create a custom class that implements that contract and pass it to the render() method. Note that Presenter is an interface, not a class, therefore you must implement it, not extend it. That\'s why you are getting the error.\r\n\r\nAlternatively you can extend the Laravel paginator (in order to use its pagination logic) and then pass the existing pagination instance ($users->...) to you extended class constructor. This is indeed what I did for creating my custom Zurb Foundation presenter based on the Bootstrap presenter provided by Laravel. It uses all the Laravel pagination logic and only overrides the rendering methods.', 'Pagodas', 'other', 0, '2020-07-02 23:51:22', '2020-07-02 23:54:14'),
+(12, 1, NULL, '00000', NULL, 'Yangon ( Burmese: ရန်ကုန်; pronunciation [jàɰ̃ɡòʊɰ̃ mjo̰]; lit. \'End of Strife\'), also known as Rangoon, is the capital of the Yangon Region and the largest city of Myanmar (also known as Burma). Yangon served as the capital of Myanmar until 2006, when the military government relocated the administrative functions to the purpose-built capital city of Naypyidaw [nèpjìdɔ̀] in north central Myanmar.[3] With over 5 million people, Yangon is Myanmar\'s most populous city and its most important commercial centre.\r\n\r\nYangon boasts the largest number of colonial-era buildings in Southeast Asia,[4] and has a unique colonial-era urban core that is remarkably intact.[5] The colonial-era commercial core is centered around the Sule Pagoda, which is reputed to be over 2,000 years old.[6]', 'Pagodas', 'other', 0, '2020-07-05 21:18:25', '2020-07-05 22:06:22');
 
 -- --------------------------------------------------------
 
@@ -94,7 +132,7 @@ INSERT INTO `dtb_submenu` (`id`, `menu_id`, `title`, `name`, `address`, `descrip
 CREATE TABLE `dtb_submenu_image` (
   `id` int(11) NOT NULL,
   `submenu_id` int(11) NOT NULL,
-  `image` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `image` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `type` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -107,7 +145,6 @@ INSERT INTO `dtb_submenu_image` (`id`, `submenu_id`, `image`, `type`) VALUES
 (2, 2, 'Shin-Mokhtee-Pagoda(logo).jpg', 'logo'),
 (3, 2, 'Shin-Mokhtee-Pagoda1.jpg', 'jpg'),
 (4, 2, 'Shin-Mokhtee-Pagoda2.jpg', 'jpg'),
-(5, 2, 'Shin-Mokhtee-Pagoda3.jpg', 'jpg'),
 (6, 3, 'Shin-Taunt-Pon-Pagoda(logo).jpg', 'logo'),
 (7, 3, 'Shin-Taunt-Pon-Pagoda1.jpg', 'jpg'),
 (8, 3, 'Shin-Taunt-Pon-Pagoda2.jpg', 'jpg'),
@@ -141,6 +178,12 @@ ALTER TABLE `dtb_menu`
   ADD PRIMARY KEY (`id`);
 
 --
+-- テーブルのインデックス `dtb_menu_image`
+--
+ALTER TABLE `dtb_menu_image`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- テーブルのインデックス `dtb_submenu`
 --
 ALTER TABLE `dtb_submenu`
@@ -161,6 +204,12 @@ ALTER TABLE `dtb_submenu_image`
 --
 ALTER TABLE `dtb_menu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- テーブルのAUTO_INCREMENT `dtb_menu_image`
+--
+ALTER TABLE `dtb_menu_image`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- テーブルのAUTO_INCREMENT `dtb_submenu`

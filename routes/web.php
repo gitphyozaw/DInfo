@@ -70,7 +70,7 @@ Route::post('/submenu_registration', 'submenuController@submenuInsert');
 //Route::get('autocomplete', 'home/homeController@autocomplete')->name('autocomplete');
 Route::post('/autocomplete', 'homeController@autocomplete')->name('autocomplete');
 Route::get('/show_menu/{id}', 'homeController@showMenu');
-Route::get('/pack', 'homeController@index');
+Route::get('/package', 'packageController@index');
 
 
 /**************end***********/
